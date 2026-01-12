@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    // ... add more open graph meta tags
+    // ... add more open graph meta tags kk
   },
 };
 
