@@ -1,78 +1,149 @@
 "use client";
-
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+import { Heart, Menu, X, Briefcase } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
-function onNavigate(path: string) {
-  const router = useRouter();
-  router.push(`/${path}`);
+interface HeaderProps {
+  onLoginClick: () => void;
 }
 
-export default function Header() {
-  const [currentScreen, setCurrentScreen] = useState("");
+export default function Header({ onLoginClick }: HeaderProps) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const isActive = (path: string) => pathname === path;
+
+  const navLinks = [
+    { path: "/", label: "Home" },
+    { path: "/website/explore", label: "Explore" },
+    { path: "/website/coaches", label: "Coaches" },
+    { path: "/website/resources", label: "Wellness Hub" },
+    { path: "/website/about", label: "About" },
+  ];
+
   return (
-    <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-14">
+    <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-lg border-b border-gray-200 shadow-sm">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo */}
-          <button
-            onClick={() => onNavigate("public-dashboard")}
-            className="flex items-center gap-2"
-          >
-            <div className="w-7 h-7 bg-gradient-theme rounded-lg flex items-center justify-center">
-              <span className="text-sm text-white font-bold">J</span>
+          <Link href="/" className="flex items-center gap-2 sm:gap-3 group">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-purple-600 to-blue-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+              <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </div>
-            <span className="text-base font-bold text-gray-900">JOBTANTRA</span>
-          </button>
+            <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+              LISTENO
+            </span>
+          </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6">
+          <nav className="hidden lg:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                href={link.path}
+                className={`font-medium transition-colors relative group ${
+                  isActive(link.path)
+                    ? "text-purple-600"
+                    : "text-gray-700 hover:text-purple-600"
+                }`}
+              >
+                {link.label}
+                {isActive(link.path) && (
+                  <span className="absolute -bottom-[21px] left-0 right-0 h-0.5 bg-gradient-to-r from-purple-600 to-blue-600" />
+                )}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Desktop Actions */}
+          <div className="hidden lg:flex items-center gap-3">
+            {/* Become a Coach Button */}
             <button
-              onClick={() => onNavigate("how-it-works")}
-              className={`text-sm transition-colors ${
-                currentScreen === "how-it-works"
-                  ? "text-theme-primary font-medium"
-                  : "text-slate-600 hover:text-theme-primary"
-              }`}
+              onClick={() => router.push("/coach/dashboard")}
+              className="px-4 py-2 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg font-medium hover:shadow-lg transition-all flex items-center gap-2"
             >
-              How It Works
+              <Briefcase className="w-4 h-4" />
+              Become a Coach
             </button>
+
+            {/* Login/Signup Button */}
             <button
-              onClick={() => onNavigate("explore-jobs")}
-              className={`text-sm transition-colors ${
-                currentScreen === "explore-jobs"
-                  ? "text-theme-primary font-medium"
-                  : "text-slate-600 hover:text-theme-primary"
-              }`}
+              onClick={onLoginClick}
+              className="px-6 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-medium hover:shadow-lg transition-all"
             >
-              Explore Jobs
+              Login / Sign Up
             </button>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => onNavigate("employer-landing")}
-              className="px-3 py-1.5 text-xs text-purple-700 hover:text-purple-900 transition-colors font-medium"
-            >
-              For Employers
-            </button>
-            <button
-              onClick={() => onNavigate("auth")}
-              className="px-3 py-1.5 text-xs text-slate-700 hover:text-theme-primary transition-colors"
-            >
-              Login
-            </button>
-            <button
-              onClick={() => onNavigate("onboarding")}
-              className="px-4 py-1.5 text-xs bg-theme-primary text-white rounded-lg hover:bg-theme-primary-dark transition-all shadow-sm"
-            >
-              Sign Up Free
-            </button>
-          </div>
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+          >
+            {mobileMenuOpen ? (
+              <X className="w-6 h-6 text-gray-800" />
+            ) : (
+              <Menu className="w-6 h-6 text-gray-800" />
+            )}
+          </button>
         </div>
       </div>
-    </nav>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden border-t border-gray-200 bg-white overflow-hidden"
+          >
+            <div className="container mx-auto px-4 py-4 space-y-3">
+              {/* Mobile Navigation Links */}
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  href={link.path}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`block px-4 py-3 rounded-lg font-medium transition-colors ${
+                    isActive(link.path)
+                      ? "bg-gradient-to-r from-purple-50 to-blue-50 text-purple-600"
+                      : "text-gray-700 hover:bg-gray-50"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+
+              {/* Mobile Become a Coach Button */}
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  router.push("/coach/dashboard");
+                }}
+                className="w-full px-4 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg font-medium hover:shadow-lg transition-all flex items-center justify-center gap-2"
+              >
+                <Briefcase className="w-5 h-5" />
+                Become a Coach
+              </button>
+
+              {/* Mobile Login Button */}
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onLoginClick();
+                }}
+                className="w-full px-4 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-medium hover:shadow-lg transition-all"
+              >
+                Login / Sign Up
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
   );
 }

@@ -1,3 +1,1 @@
-import { handlers } from '@/libs/auth';
-
-export const { GET, POST } = handlers;
+const baseUrl = "http://localhost:3000/api/auth";
