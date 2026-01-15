@@ -5,11 +5,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { Heart, Menu, X, Briefcase } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-interface HeaderProps {
-  onLoginClick: () => void;
-}
-
-export default function Header({ onLoginClick }: HeaderProps) {
+export default function Header({ onLoginClick }: any) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
