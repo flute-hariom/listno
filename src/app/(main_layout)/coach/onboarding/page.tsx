@@ -838,7 +838,7 @@ export default function CoachOnboarding() {
                       Certifications & Licenses
                     </label>
                     <div className="space-y-2">
-                      {formData.certifications.map((cert, index) => (
+                      {formData.certifications.map((cert: string, index: number) => (
                         <div
                           key={index}
                           className="flex items-center gap-2 p-3 bg-purple-50 rounded-lg border border-purple-200"
@@ -1106,7 +1106,7 @@ export default function CoachOnboarding() {
                       <div
                         key={day}
                         className={`border-2 rounded-xl p-4 transition-all ${
-                          dayData.enabled
+                          (dayData as any)  .enabled
                             ? "border-purple-500 bg-purple-50"
                             : "border-gray-200"
                         }`}
@@ -1115,7 +1115,7 @@ export default function CoachOnboarding() {
                           <label className="flex items-center gap-3 cursor-pointer">
                             <input
                               type="checkbox"
-                              checked={dayData.enabled}
+                              checked={(dayData as any).enabled}
                               onChange={() =>
                                 toggleAvailabilityDay(
                                   day as keyof typeof formData.availability,
@@ -1127,15 +1127,15 @@ export default function CoachOnboarding() {
                               {day}
                             </span>
                           </label>
-                          {dayData.enabled && dayData.slots.length > 0 && (
+                          {(dayData as any).enabled && (dayData as any).slots.length > 0 && (
                             <span className="text-sm text-purple-600 font-medium">
-                              {dayData.slots.length} slot
-                              {dayData.slots.length > 1 ? "s" : ""} selected
+                              {(dayData as any).slots.length} slot
+                              {(dayData as any).slots.length > 1 ? "s" : ""} selected
                             </span>
                           )}
                         </div>
 
-                        {dayData.enabled && (
+                        {(dayData as any).enabled && (
                           <motion.div
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: "auto" }}
@@ -1151,7 +1151,7 @@ export default function CoachOnboarding() {
                                   )
                                 }
                                 className={`px-3 py-2 rounded-lg text-xs font-medium transition-all ${
-                                  dayData.slots.includes(slot)
+                                  (dayData as any).slots.includes(slot)
                                     ? "bg-purple-600 text-white"
                                     : "bg-white border border-gray-300 text-gray-700 hover:border-purple-400"
                                 }`}
