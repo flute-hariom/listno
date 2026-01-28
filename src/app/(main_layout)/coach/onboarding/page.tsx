@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   User,
@@ -33,7 +33,7 @@ import {
 import { Button } from "@/src/components/ui/Button";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function CoachOnboarding() {
+function CoachOnboardingContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [step, setStep] = useState(1);
@@ -1827,5 +1827,13 @@ export default function CoachOnboarding() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function CoachOnboarding() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-8 px-4 flex items-center justify-center"><div className="text-purple-600">Loading...</div></div>}>
+      <CoachOnboardingContent />
+    </Suspense>
   );
 }
