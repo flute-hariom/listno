@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   Heart,
@@ -18,10 +18,31 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 // import LoginModal from "@/components/LoginModal";
+import { useGetCmsBuzzListQuery } from "@/src/redux/api/cmsBuzzApi";
 
 export default function HomePage() {
   const router = useRouter();
   const [loginModalOpen, setLoginModalOpen] = useState(false);
+
+  const { data: buzzData, isLoading: buzzLoading } = useGetCmsBuzzListQuery({
+    page: 1,
+    limit: 5,
+    sortBy: "createdAt",
+    sortOrder: "desc",
+  });
+
+  console.log("first render buzzData:", buzzData);
+
+  useEffect(() => {
+
+    if (buzzData) {
+      console.log("CMS Buzz Data:", buzzData);
+    }
+    document.title = "Listno - Talk to Someone Who Cares";
+  }, [buzzData]);
+
+
+
 
   const categories = [
     {

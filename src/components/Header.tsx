@@ -58,7 +58,8 @@ export default function Header({ onLoginClick }: any) {
           <div className="hidden lg:flex items-center gap-3">
             {/* Become a Coach Button */}
             <button
-              onClick={() => router.push("/coach/dashboard")}
+              // onClick={() => router.push("/coach/dashboard")}
+              onClick={() => router.push("/website/become-coach")}
               className="px-4 py-2 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg font-medium hover:shadow-lg transition-all flex items-center gap-2"
             >
               <Briefcase className="w-4 h-4" />
