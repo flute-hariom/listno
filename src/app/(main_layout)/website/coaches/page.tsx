@@ -101,12 +101,12 @@ export default function CoachesPage() {
     const matchesSearch =
       coach.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       coach.expertise.some((exp) =>
-        exp.toLowerCase().includes(searchQuery.toLowerCase())
+        exp.toLowerCase().includes(searchQuery.toLowerCase()),
       );
     const matchesCategory =
       selectedCategory === "all" ||
       coach.expertise.some((exp) =>
-        exp.toLowerCase().includes(selectedCategory.toLowerCase())
+        exp.toLowerCase().includes(selectedCategory.toLowerCase()),
       );
     const matchesLanguage =
       selectedLanguage === "all" || coach.languages.includes(selectedLanguage);
@@ -289,7 +289,7 @@ export default function CoachesPage() {
               {/* Actions */}
               <div className="space-y-2">
                 <Button
-                  onClick={() => router.push(`/coach/${coach.id}`)}
+                  onClick={() => router.push(`coaches/${coach.id}`)}
                   variant="outline"
                   className="w-full"
                 >

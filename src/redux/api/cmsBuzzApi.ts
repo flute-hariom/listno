@@ -4,16 +4,17 @@ export const cmsBuzzListApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getCmsBuzzList: builder.query({
       query: ({ page, pageSize }) => {
-        const params = new URLSearchParams();
+        const params = new URLSearchParams({});
         if (page) params.append("page", page);
         if (pageSize) params.append("limit", pageSize);
-
-        return `/api/v1/content-management/admin/flute-buzz?${params}`;
+        return {
+          url: `/api/v1/content-management/authors?${params.toString()}`,
+          method: "GET",
+          headers: {
+            Authorization: "Bearer admin_token",
+          },
+        };
       },
-    //   headers: {
-    //     Authorization: "Bearer admin_token",
-    //   },
-
       providesTags: ["listno"],
     }),
 

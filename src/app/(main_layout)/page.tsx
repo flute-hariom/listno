@@ -31,18 +31,11 @@ export default function HomePage() {
     sortOrder: "desc",
   });
 
-  console.log("first render buzzData:", buzzData);
-
   useEffect(() => {
-
-    if (buzzData) {
-      console.log("CMS Buzz Data:", buzzData);
+    if (buzzData && buzzData.data) {
+      console.log("CMS Buzz Data:", buzzData?.data);
     }
-    document.title = "Listno - Talk to Someone Who Cares";
   }, [buzzData]);
-
-
-
 
   const categories = [
     {

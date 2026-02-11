@@ -8,8 +8,14 @@ import { usePathname } from "next/navigation";
 export default function UnauthLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
 
-  const shouldHideHeaderFooter =
-    pathname?.includes("/coach") || pathname?.includes("/user");
+  console.log("pathname", pathname);
+
+  // const shouldHideHeaderFooter =
+  //   pathname?.includes("/coach") || pathname?.includes("/user");
+
+  const shouldHideHeaderFooter = /^\/(coach|user)(\/|$)/.test(pathname);
+
+  console.log("shouldHideHeaderFooter", shouldHideHeaderFooter);
   return (
     <div className="flex flex-col justify-between w-full min-h-screen mx-auto">
       {!shouldHideHeaderFooter && <Header />}
