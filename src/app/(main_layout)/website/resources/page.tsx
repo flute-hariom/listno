@@ -304,7 +304,7 @@ export default function ResourcesPage() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group cursor-pointer"
-                onClick={() => router.push(`/article/${article.id}`)}
+                onClick={() => router.push(`article/${article.id}`)}
               >
                 <div className="md:flex">
                   <div className="md:w-1/2 relative h-64 md:h-auto">
@@ -382,7 +382,7 @@ export default function ResourcesPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05 }}
               className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all group cursor-pointer"
-              onClick={() => router.push(`/article/${article.id}`)}
+              onClick={() => router.push(`article/${article.id}`)}
             >
               {/* Article Image */}
               <div className="relative h-48 overflow-hidden">
