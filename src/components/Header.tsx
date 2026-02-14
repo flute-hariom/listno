@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { Heart, Menu, X, Briefcase } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useGoogleLogin } from "@react-oauth/google";
 
 export default function Header({ onLoginClick }: any) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -19,6 +20,23 @@ export default function Header({ onLoginClick }: any) {
     { path: "/website/resources", label: "Wellness Hub" },
     { path: "/website/about", label: "About" },
   ];
+
+  const responseGoogle = async (authResult: any) => {
+    try {
+      console.log("authResult:", authResult);
+
+      // Example redirect
+      // router.push("/dashboard");
+    } catch (error) {
+      console.log("error while requesting google code:", error);
+    }
+  };
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: responseGoogle,
+    onError: responseGoogle,
+    flow: "auth-code",
+  });
 
   return (
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-lg border-b border-gray-200 shadow-sm">
@@ -68,7 +86,8 @@ export default function Header({ onLoginClick }: any) {
 
             {/* Login/Signup Button */}
             <button
-              onClick={onLoginClick}
+              // onClick={onLoginClick}
+              onClick={() => googleLogin()}
               className="px-6 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-medium hover:shadow-lg transition-all"
             >
               Login / Sign Up
@@ -131,7 +150,7 @@ export default function Header({ onLoginClick }: any) {
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  onLoginClick();
+                  googleLogin();
                 }}
                 className="w-full px-4 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-medium hover:shadow-lg transition-all"
               >

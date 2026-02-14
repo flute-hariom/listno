@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ReactNode } from "react";
 import ReduxProvider from "../redux/ReduxProvider";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +17,6 @@ export const metadata: Metadata = {
   },
 };
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -24,13 +24,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-white">
-      <body
-        className={
-          "bg-white text-black min-h-screen m-0 flex place-items-center min-w-[320px]"
-        }
-      >
-        <ReduxProvider>{children}</ReduxProvider>
-      </body>
+      <GoogleOAuthProvider clientId="1006740086739-hur0rkv9k7hf4rp40a4i4trjgg2bo7jg.apps.googleusercontent.com">
+        <body
+          className={
+            "bg-white text-black min-h-screen m-0 flex place-items-center min-w-[320px]"
+          }
+        >
+          <ReduxProvider>{children}</ReduxProvider>
+        </body>
+      </GoogleOAuthProvider>
     </html>
   );
 }
