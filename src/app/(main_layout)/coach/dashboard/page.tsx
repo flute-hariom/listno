@@ -1,3 +1,4 @@
+// this is the page of after completing all the details of becoming the coach
 "use client";
 
 import { Calendar, DollarSign, Users, Star, Briefcase } from "lucide-react";
