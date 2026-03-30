@@ -27,13 +27,14 @@ export default function StepThree() {
   };
 
   return (
-        <div className="min-h-screen w-full bg-gradient-to-br from-[#eef2ff] via-[#f5f3ff] to-[#eef2ff] flex items-center justify-center p-4">
+        <div className="min-h-screen w-full bg-gradient-to-br from-[#FAF5FF] via-[#EFF6FF] to-[#FDF2F8] flex items-center justify-center p-4">
 
-       <div className="w-full max-w-4xl">
+       <div className="w-full max-w-3xl">
 
         {/* HEADER */}
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-semibold text-gray-800">Welcome to LISTENO</h1>
+          <h1 className="text-4xl font-semibold text-black
+          ">Welcome to LISTENO</h1>
           <p className="text-gray-500 mt-2">Let's set up your profile in just a few steps</p>
         </div>
 
@@ -54,10 +55,10 @@ export default function StepThree() {
           {/* CARD HEADER */}
           <div className="flex items-center gap-4 mb-8">
             <div className="bg-gradient-to-r from-purple-500 to-blue-500 p-3 rounded-xl text-white">
-              <Languages size={22} />
+              <Languages size={30} />
             </div>
             <div>
-              <h2 className="text-xl font-semibold text-gray-800">Preferred Languages</h2>
+              <h2 className="text-2xl font-semibold text-black">Preferred Languages</h2>
               <p className="text-gray-500 text-sm">Select languages you're comfortable with</p>
             </div>
           </div>
@@ -72,7 +73,7 @@ export default function StepThree() {
                   onClick={() => toggle(lang)}
                   className={`py-3 rounded-xl border-2 text-sm font-medium transition-all
                     ${active
-                      ? "border-blue-500 text-blue-600 bg-blue-50 shadow-[0_4px_12px_rgba(37,99,235,0.15)]"
+                      ? "border-blue-500 text-blue-600 bg-[#EFF6FF] shadow-[0_4px_12px_rgba(37,99,235,0.15)]"
                       : "border-gray-200 text-gray-700 hover:border-blue-300"}`}
                 >
                   {lang}
@@ -86,7 +87,7 @@ export default function StepThree() {
         <div className="flex justify-between mt-10">
           <button
             onClick={() => router.back()}
-            className="px-10 py-3 rounded-xl border border-gray-300 text-gray-600 hover:bg-gray-100 flex items-center gap-2"
+            className="px-40 py-3 rounded-xl  bg-[#FFFFFF] border border-gray-300 text-black hover:bg-gray-100 flex items-center gap-2"
           >
             <ChevronLeft size={18} /> Back
           </button>
@@ -94,9 +95,9 @@ export default function StepThree() {
           <button
             onClick={() => selected.length > 0 && router.push("/userOnboarding/step-4")}
             disabled={selected.length === 0}
-            className={`px-12 py-3 rounded-xl text-white shadow-md flex items-center gap-2 transition-all
+            className={`px-40 py-3 rounded-xl text-white shadow-md flex items-center gap-2 transition-all
               ${selected.length > 0
-                ? "bg-gradient-to-r from-purple-500 to-blue-500 hover:opacity-90"
+                ? "bg-gradient-to-r from-purple-600 to-blue-600 hover:opacity-90"
                 : "bg-gray-300 cursor-not-allowed"}`}
           >
             Next <ChevronRight size={18} />

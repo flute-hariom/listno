@@ -57,9 +57,9 @@ export default function StepTwo() {
   const isFormValid = () => selectedCategories.length || selectedTopics.length;
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#eef2ff] via-[#f5f3ff] to-[#eef2ff] flex items-center justify-center p-4">
+    <div className="min-h-screen w-full bg-gradient-to-br from-[#FAF5FF] via-[#EFF6FF] to-[#FDF2F8] flex items-center justify-center p-4">
 
-<div className="w-full max-w-5xl">
+<div className="w-full max-w-3xl">
 
         {/* HEADER */}
         <div className="text-center mb-10">
@@ -84,7 +84,7 @@ export default function StepTwo() {
           {/* CARD HEADER */}
           <div className="flex items-center gap-4 mb-8">
             <div className="bg-gradient-to-r from-purple-500 to-blue-500 p-3 rounded-xl text-white">
-              <Brain size={22} />
+              <Brain size={28} />
             </div>
             <div>
               <h2 className="text-xl font-semibold text-gray-800">Areas of Interest</h2>
@@ -102,14 +102,14 @@ export default function StepTwo() {
                 <button
                   key={cat.name}
                   onClick={() => toggleCategory(cat.name)}
-                  className={`rounded-2xl p-6 flex flex-col items-center justify-center gap-3 border-2 transition-all duration-200
+                  className={`rounded-2xl p-4 flex flex-col items-center justify-center gap-3 border-2 transition-all duration-200
                     ${active
                       ? "border-purple-500 bg-purple-100 shadow-[0_8px_20px_rgba(124,58,237,0.25)]"
                       : "border-gray-200 bg-white hover:border-purple-300"}`}
                 >
                   <Icon
-                    size={28}
-                    className={`${active ? "text-purple-600" : "text-gray-500"}`}
+                    size={30}
+                    className={`${active ? "text-purple-600" : "text-[#99A1AF]"}`}
                   />
                   <span
                     className={`font-medium text-base ${
@@ -124,30 +124,32 @@ export default function StepTwo() {
           </div>
 
           {/* TOPICS */}
-          <p className="text-sm text-gray-600 mb-3">Or select specific topics:</p>
-          <div className="grid md:grid-cols-3 gap-3">
+          <p className="text-sm text-[#364153] mb-3">Or select specific topics:</p>
+          <div className="grid md:grid-cols-3 gap-2">
             {topics.map(topic => {
               const active = selectedTopics.includes(topic);
               return (
                 <button
                   key={topic}
                   onClick={() => toggleTopic(topic)}
-                  className={`rounded-full px-4 py-2 text-sm border transition
+                  className={`rounded-xl px-4 py-2 text-sm border transition
                     ${active
-                      ? "bg-gradient-to-r from-purple-500 to-blue-500 text-white border-transparent"
-                      : "bg-gray-100 text-gray-600 border-gray-200 hover:border-purple-400"}`}
-                >
+                      ? "bg-[#9810FA] text-white border-[#9810FA]"
+                      : "bg-[#F3F4F6] text-[#364153] border-[#F3F4F6] hover:bg-[#e8e8f2]"}`}
+                      >
                   {topic}
                 </button>
               );
             })}
           </div>
 
-          {/* FOOTER BUTTONS */}
-          <div className="flex justify-between mt-12">
+          
+        </div>
+        {/* FOOTER BUTTONS */}
+          <div className="flex justify-between mt-6">
             <button
               onClick={() => router.back()}
-              className="px-8 py-3 rounded-xl border border-gray-300 text-gray-600 hover:bg-gray-100 flex items-center gap-2"
+              className="px-40 py-3 rounded-xl border bg-[#FFFFFF] border-[#FFFFFF] text-black hover:bg-gray-100 border-gray-300 flex items-center gap-2"
             >
               <ChevronLeft size={18} /> Back
             </button>
@@ -155,16 +157,16 @@ export default function StepTwo() {
             <button
               disabled={!isFormValid()}
               onClick={() => router.push("/userOnboarding/step-3")}
-              className={`px-10 py-3 rounded-xl flex items-center gap-2 text-white shadow-md
+              className={`px-40 py-3 rounded-xl flex items-center gap-2 text-white shadow-md
                 ${isFormValid()
-                  ? "bg-gradient-to-r from-purple-500 to-blue-500 hover:opacity-90"
+                  ? "bg-gradient-to-r from-[#9810FA] to-[#155DFC] hover:opacity-90"
                   : "bg-gray-300 cursor-not-allowed"}`}
             >
               Next <ChevronRight size={18} />
             </button>
           </div>
-        </div>
       </div>
+      
     </div>
   );
 }

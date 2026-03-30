@@ -85,17 +85,17 @@ export default function StepFour() {
 
           {/* Interests */}
           <h3 className="font-medium mb-4">Your Interests:</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 mb-8">
             {interests.map((item) => (
               <button
                 key={item}
                 onClick={() =>
                   toggleSelection(item, selectedInterests, setSelectedInterests)
                 }
-                className={`py-3 rounded-xl transition ${
+                className={`py-2 rounded-xl transition ${
                   selectedInterests.includes(item)
-                    ? "bg-gradient-to-r from-green-500 to-green-500 text-white"
-                    : "bg-gray-100 hover:bg-gray-200 text-gray-700"
+                    ? "bg-gradient-to-r from-[#00A63E] to-[#00A63E] text-white"
+                    : "bg-gray-100 hover:bg-[#daf1e2] text-black"
                 }`}
               >
                 {item}
@@ -105,17 +105,17 @@ export default function StepFour() {
 
           {/* Goals */}
           <h3 className="font-semibold mb-4">Your Goals:</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {goals.map((item) => (
               <button
                 key={item}
                 onClick={() =>
                   toggleSelection(item, selectedGoals, setSelectedGoals)
                 }
-                className={`py-3 rounded-xl transition ${
+                className={`py-2 rounded-xl transition ${
                   selectedGoals.includes(item)
-                    ? "bg-gradient-to-r from-green-500 to-green-500 text-white"
-                    : "bg-gray-100 hover:bg-gray-200 text-gray-700"
+                    ? "bg-gradient-to-r from-[#00A63E] to-[#00A63E] text-white"
+                    : "bg-gray-100 hover:bg-[#daf1e2] text-black"
                 }`}
               >
                 {item}
@@ -131,7 +131,7 @@ export default function StepFour() {
           {/* Back */}
           <button
             onClick={() => router.back()}
-            className="flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-white hover:bg-gray-200"
+            className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[#FFFFFF] hover:bg-gray-100"
           >
             <ArrowLeft size={18} />
             Back
@@ -140,7 +140,7 @@ export default function StepFour() {
           {/* Complete Setup */}
           <button
             onClick={() => router.push("/userOnboarding/dashboard")}
-            className="flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium"
+            className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium"
           >
             <Check size={18} />
             Complete Setup
@@ -151,7 +151,7 @@ export default function StepFour() {
         <div className="text-center mt-6">
           <button
             onClick={() => router.push("/userOnboarding/dashboard")}
-            className="text-gray-500 hover:text-gray-700"
+            className="text-[#4A5565] hover:text-black"
           >
             Skip for now
           </button>
