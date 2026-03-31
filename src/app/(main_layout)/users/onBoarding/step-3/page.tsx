@@ -93,7 +93,7 @@ export default function StepThree() {
           </button>
 
           <button
-            onClick={() => selected.length > 0 && router.push("/userOnboarding/step-4")}
+            onClick={() => selected.length > 0 && router.push("/users/onBoarding/step-4")}
             disabled={selected.length === 0}
             className={`px-40 py-3 rounded-xl text-white shadow-md flex items-center gap-2 transition-all
               ${selected.length > 0

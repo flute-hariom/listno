@@ -139,7 +139,7 @@ export default function StepFour() {
 
           {/* Complete Setup */}
           <button
-            onClick={() => router.push("/userOnboarding/dashboard")}
+            onClick={() => router.push("/users/dashboard")}
             className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium"
           >
             <Check size={18} />
@@ -150,7 +150,7 @@ export default function StepFour() {
         {/* Skip */}
         <div className="text-center mt-6">
           <button
-            onClick={() => router.push("/userOnboarding/dashboard")}
+            onClick={() => router.push("/users/dashboard")}
             className="text-[#4A5565] hover:text-black"
           >
             Skip for now

@@ -78,7 +78,7 @@ export default function StepOne() {
   const handleNext = () => {
     if (isFormValid()) {
       localStorage.setItem("userOnboardingStep1", JSON.stringify(formData));
-      router.push("/userOnboarding/step-2");
+      router.push("/users/onBoarding/step-2");
     }
   };
 

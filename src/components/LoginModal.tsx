@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import { Chrome, Facebook } from "lucide-react";
 import { Button } from "./ui/Button";
+import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
+
 import {
   Dialog,
   DialogContent,
@@ -27,9 +29,9 @@ export default function LoginModal({
   const handleLogin = (provider: "google" | "facebook") => {
     localStorage.setItem("loginContext", loginContext);
     localStorage.setItem("authProvider", provider);
-    router.push("/auth");
+    router.push("/auth/login");
   };
-
+ 
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md">
@@ -43,26 +45,47 @@ export default function LoginModal({
         </DialogHeader>
 
         <div className="space-y-4 py-4">
-          {/* Google */}
-          <Button
-            onClick={() => handleLogin("google")}
-            variant="outline"
-            className="w-full h-12 border-2 hover:border-purple-600 hover:bg-purple-50"
-          >
-            <Chrome className="w-5 h-5 mr-2" />
-            Continue with Google
-          </Button>
 
-          {/* Facebook */}
-          <Button
-            onClick={() => handleLogin("facebook")}
-            variant="outline"
-            className="w-full h-12 border-2 hover:border-purple-600 hover:bg-purple-50"
-          >
-            <Facebook className="w-5 h-5 mr-2" />
-            Continue with Facebook
-          </Button>
+{/* Google */}
+<button
+  onClick={() => handleLogin("google")}
+  className="w-full h-[48px] relative flex items-center justify-center rounded-xl border border-gray-300 bg-[#F5F5F5] shadow-sm hover:shadow-md transition"
+>
+  {/* Left Icon */}
+  <img
+    src="https://www.svgrepo.com/show/475656/google-color.svg"
+    alt="google"
+    className="w-5 h-5 absolute left-5"
+  />
 
+  {/* Center Text */}
+  <span className="text-[16px] font-medium text-gray-700">
+    Continue with Google
+  </span>
+</button>
+
+{/* Facebook */}
+<button
+  onClick={() => handleLogin("facebook")}
+  className="w-full h-[48px] relative flex items-center justify-center rounded-xl bg-[#5B7DBE] shadow-md hover:shadow-lg transition"
+>
+  {/* Left Icon */}
+ <div className="absolute left-5 w-6 h-6 flex items-center justify-center bg-white rounded-full overflow-hidden">
+  <svg
+    viewBox="0 0 21 21"
+    className="w-[120%] h-[120%] translate-y-[1px]"
+    fill="#5B7DBE"
+  >
+    <path d="M15 3h-3a5 5 0 0 0-5 5v3H4v4h3v6h4v-6h3.2l.8-4H11V8a1 1 0 0 1 1-1h3V3z" />
+  </svg>
+</div>
+  {/* Center Text */}
+  <span className="text-[16px] font-semibold text-white">
+    Continue with Facebook
+  </span>
+</button>
+
+         
           <p className="text-xs text-center text-gray-500 mt-4">
             By continuing, you agree to our Terms of Service and Privacy Policy
           </p>

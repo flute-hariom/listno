@@ -72,7 +72,7 @@ export default function ConnectCoach() {
   useEffect(() => {
     if (screen === "ended") {
       const timer = setTimeout(() => {
-        router.push("/userOnboarding/dashboard");
+        router.push("/users/dashboard");
       }, 3000);
 
       return () => clearTimeout(timer);

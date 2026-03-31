@@ -115,7 +115,7 @@ return (
       <HeaderButton
         icon={<User size={18} />}
         label="Profile"   
-        onClick={() => router.push("/userOnboarding/dashboard/userProfile")}
+        onClick={() => router.push("/users/dashboard/userProfile")}
       />
 
       <HeaderButton
@@ -163,7 +163,7 @@ icon={<Sparkles size={30}/>}
 title="Random Connect"
 desc="Talk to someone now"
 gradient="from-pink-500 to-purple-500"
-onClick={()=>router.push("/userOnboarding/dashboard/random")}
+onClick={()=>router.push("/users/dashboard/random")}
 />
 
 <FeatureCard
@@ -171,7 +171,7 @@ icon={<MessageCircle size={30}/>}
 title="Mood Journal"
 desc="Track your feelings"
 gradient="from-blue-500 to-cyan-500"
-onClick={()=>router.push("/userOnboarding/dashboard/mood-journal")}
+onClick={()=>router.push("/users/dashboard/mood-journal")}
 />
 
 </div>
@@ -225,10 +225,10 @@ onClick={()=>router.push("/userOnboarding/dashboard/mood-journal")}
 <div className="flex justify-around items-center py-5">
 
 <NavItem icon={<Home size={22}/>} label="Home" active onClick={()=>router.push("/dashboard")} />
-<NavItem icon={<PhoneCall size={22}/>} label="Random" onClick={()=>router.push("/userOnboarding/dashboard/random")} />
-<NavItem icon={<MessageCircle size={22}/>} label="Talk Log" onClick={()=>router.push("/userOnboarding/dashboard/talk-log")} />
-<NavItem icon={<Trophy size={22}/>} label="Top" onClick={()=>router.push("/userOnboarding/dashboard/top-profiles")} />
-<NavItem icon={<Wallet size={22}/>} label="Wallet" onClick={()=>router.push("/userOnboarding/dashboard/wallet")} />
+<NavItem icon={<PhoneCall size={22}/>} label="Random" onClick={()=>router.push("/users/dashboard/random")} />
+<NavItem icon={<MessageCircle size={22}/>} label="Talk Log" onClick={()=>router.push("/users/dashboard/talk-log")} />
+<NavItem icon={<Trophy size={22}/>} label="Top" onClick={()=>router.push("/users/dashboard/top-profiles")} />
+<NavItem icon={<Wallet size={22}/>} label="Wallet" onClick={()=>router.push("/users/dashboard/wallet")} />
 
 </div>
 
@@ -456,7 +456,7 @@ function CoachCard({ coach, router }: CoachCardProps) {
       {/* VIEW PROFILE */}
       <button
         onClick={() =>
-          router.push(`/userOboarding/dashboard/coach/${coach.id}`)
+          router.push(`/users/dashboard/coach/${coach.id}`)
         }
         className="w-full mt-4 border border-purple-300 text-purple-600 py-2.5 rounded-xl flex items-center justify-center gap-2 hover:bg-purple-50 transition-all"
       >

@@ -156,7 +156,7 @@ export default function StepTwo() {
 
             <button
               disabled={!isFormValid()}
-              onClick={() => router.push("/userOnboarding/step-3")}
+              onClick={() => router.push("/users/onBoarding/step-3")}
               className={`px-40 py-3 rounded-xl flex items-center gap-2 text-white shadow-md
                 ${isFormValid()
                   ? "bg-gradient-to-r from-[#9810FA] to-[#155DFC] hover:opacity-90"
