@@ -5,12 +5,9 @@ import { useRouter, usePathname } from "next/navigation";
 import { Heart, Menu, X, Briefcase } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useGoogleLogin } from "@react-oauth/google";
-<<<<<<< HEAD
 import { useDispatch } from "react-redux";
 import { openAuthModal } from "../redux/slices/authSlice";
-=======
 import LoginModal from "./LoginModal";
->>>>>>> 4fa28e2 (add login popup)
 
 export default function Header({ onLoginClick }: any) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -18,8 +15,7 @@ export default function Header({ onLoginClick }: any) {
   const router = useRouter();
   const pathname = usePathname();
 
-const dispatch = useDispatch();
-
+  const dispatch = useDispatch();
 
   const isActive = (path: string) => pathname === path;
 
@@ -101,12 +97,8 @@ const dispatch = useDispatch();
             {/* Login/Signup Button */}
             <button
               // onClick={onLoginClick}
-<<<<<<< HEAD
-              onClick={() => dispatch(openAuthModal())}
-=======
               onClick={handleLoginClick}
               // onClick={() => googleLogin()}
->>>>>>> 4fa28e2 (add login popup)
               className="px-6 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-medium hover:shadow-lg transition-all"
             >
               Login / Sign Up
