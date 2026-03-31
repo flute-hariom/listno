@@ -5,11 +5,16 @@ import { useRouter, usePathname } from "next/navigation";
 import { Heart, Menu, X, Briefcase } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useGoogleLogin } from "@react-oauth/google";
+<<<<<<< HEAD
 import { useDispatch } from "react-redux";
 import { openAuthModal } from "../redux/slices/authSlice";
+=======
+import LoginModal from "./LoginModal";
+>>>>>>> 4fa28e2 (add login popup)
 
 export default function Header({ onLoginClick }: any) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -42,6 +47,10 @@ const dispatch = useDispatch();
     onError: responseGoogle,
     flow: "auth-code",
   });
+
+  const handleLoginClick = () => {
+    setLoginModalOpen(true);
+  };
 
   return (
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-lg border-b border-gray-200 shadow-sm">
@@ -92,7 +101,12 @@ const dispatch = useDispatch();
             {/* Login/Signup Button */}
             <button
               // onClick={onLoginClick}
+<<<<<<< HEAD
               onClick={() => dispatch(openAuthModal())}
+=======
+              onClick={handleLoginClick}
+              // onClick={() => googleLogin()}
+>>>>>>> 4fa28e2 (add login popup)
               className="px-6 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-medium hover:shadow-lg transition-all"
             >
               Login / Sign Up
@@ -155,7 +169,7 @@ const dispatch = useDispatch();
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  googleLogin();
+                  // googleLogin();
                 }}
                 className="w-full px-4 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-medium hover:shadow-lg transition-all"
               >
@@ -165,6 +179,12 @@ const dispatch = useDispatch();
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Login Modal */}
+      <LoginModal
+        open={loginModalOpen}
+        onClose={() => setLoginModalOpen(false)}
+      />
     </header>
   );
 }
