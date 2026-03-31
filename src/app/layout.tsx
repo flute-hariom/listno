@@ -4,6 +4,7 @@ import "./globals.css";
 import { ReactNode } from "react";
 import ReduxProvider from "../redux/ReduxProvider";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import AuthModal from "../components/ui/AuthModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,7 +31,11 @@ export default function RootLayout({
             "bg-white text-black min-h-screen m-0 flex place-items-center min-w-[320px]"
           }
         >
-          <ReduxProvider>{children}</ReduxProvider>
+          
+          <ReduxProvider>
+            <AuthModal/>
+            {children}
+            </ReduxProvider>
         </body>
       </GoogleOAuthProvider>
     </html>

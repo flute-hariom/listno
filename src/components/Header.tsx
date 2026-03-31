@@ -5,11 +5,16 @@ import { useRouter, usePathname } from "next/navigation";
 import { Heart, Menu, X, Briefcase } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useGoogleLogin } from "@react-oauth/google";
+import { useDispatch } from "react-redux";
+import { openAuthModal } from "../redux/slices/authSlice";
 
 export default function Header({ onLoginClick }: any) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+
+const dispatch = useDispatch();
+
 
   const isActive = (path: string) => pathname === path;
 
@@ -87,7 +92,7 @@ export default function Header({ onLoginClick }: any) {
             {/* Login/Signup Button */}
             <button
               // onClick={onLoginClick}
-              onClick={() => googleLogin()}
+              onClick={() => dispatch(openAuthModal())}
               className="px-6 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-medium hover:shadow-lg transition-all"
             >
               Login / Sign Up
