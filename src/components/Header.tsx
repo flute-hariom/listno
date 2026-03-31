@@ -60,7 +60,7 @@ export default function Header({ onLoginClick }: any) {
             <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
               LISTENO
             </span>
-          </Link>
+          </Link> 
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
