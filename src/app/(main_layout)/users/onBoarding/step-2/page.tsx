@@ -1,178 +1,269 @@
 "use client";
 
-// app/onboarding/step-2/page.tsx
-// Cleaned + pixel‑matched version based on your screenshot
-
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Brain, Heart, Briefcase, BookOpen, Sparkles, Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { User, Mail, Phone, MapPin, Camera, ChevronDown } from "lucide-react";
 
-export default function StepTwo() {
+export default function StepOne() {
   const router = useRouter();
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    dateOfBirth: "",
+    gender: "",
+    location: "",
+    bio: "",
+    profilePhoto: null as File | null,
+    profilePhotoPreview: "",
+  });
+  
+  const [locationSuggestions, setLocationSuggestions] = useState<string[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
-  // MAIN CATEGORIES (same order as UI)
-  const categories = [
-    { name: "Mind & Emotions", icon: Brain },
-    { name: "Relationships", icon: Heart },
-    { name: "Career", icon: Briefcase },
-    { name: "Education", icon: BookOpen },
-    { name: "Wellness", icon: Sparkles },
-    { name: "Astro & Spiritual", icon: Star },
+  const mockLocations = [
+    "Mumbai, Maharashtra", "Delhi, Delhi", "Bangalore, Karnataka",
+    "Chennai, Tamil Nadu", "Kolkata, West Bengal", "Pune, Maharashtra",
+    "Hyderabad, Telangana", "Ahmedabad, Gujarat",
   ];
 
-  // TOPICS (same as screenshot layout)
-  const topics = [
-    "Stress Management", "Worry & Anxiety", "Confidence Building",
-    "Self‑Respect", "Emotional Hurt", "Mental Fatigue",
-    "Finding Calm", "Overcoming Fear", "Love & Romance",
-    "Breakup Support", "Marriage Counseling", "Parenting",
-    "Trust Issues", "Communication", "Friendship",
-    "Loneliness", "Work Pressure", "Boss Relationship",
-    "Career Growth", "Work‑Life Balance", "Interview Prep",
-    "Colleague Relations", "Salary Negotiation", "Career Change",
-    "Exam Stress", "Study Motivation", "Focus & Concentration",
-    "Study Habits", "Academic Discipline", "Exam Pressure",
-    "Learning Strategies", "Academic Performance", "Sleep Issues",
-    "Fitness Goals", "Nutrition", "Energy Levels",
-    "Self‑Care", "Recovery", "General Health",
-    "Daily Routine", "Astrology Reading", "Compatibility Match",
-    "Career Astrology", "Tarot Reading", "Birth Chart",
-    "Planetary Influence", "Spiritual Guidance", "Future Predictions",
-  ];
+  const genderOptions = ["Female", "Male", "Non-binary", "Prefer not to say", "Other"];
 
-  const toggleCategory = (name: string) => {
-    setSelectedCategories(prev =>
-      prev.includes(name) ? prev.filter(c => c !== name) : [...prev, name]
+  const isFormValid = () => {
+    return (
+      formData.fullName.trim() !== "" &&
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) &&
+      /^[+]?[(]?[0-9]{1,4}[)]?[-\s.]?[0-9]{1,4}[-\s.]?[0-9]{1,4}[-\s.]?[0-9]{1,9}$/.test(formData.phone) &&
+      formData.dateOfBirth !== "" &&
+      formData.gender !== ""
     );
   };
 
-  const toggleTopic = (name: string) => {
-    setSelectedTopics(prev =>
-      prev.includes(name) ? prev.filter(t => t !== name) : [...prev, name]
-    );
+  const handleChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const isFormValid = () => selectedCategories.length || selectedTopics.length;
+  const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    handleChange("location", value);
+    
+    if (value.length > 1) {
+      setLocationSuggestions(mockLocations.filter(loc => 
+        loc.toLowerCase().includes(value.toLowerCase())
+      ));
+      setShowSuggestions(true);
+    } else {
+      setLocationSuggestions([]);
+      setShowSuggestions(false);
+    }
+  };
+
+  const selectLocation = (location: string) => {
+    handleChange("location", location);
+    setLocationSuggestions([]);
+    setShowSuggestions(false);
+  };
+
+  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file && file.type.startsWith("image/") && file.size <= 5 * 1024 * 1024) {
+      setFormData({
+        ...formData,
+        profilePhoto: file,
+        profilePhotoPreview: URL.createObjectURL(file),
+      });
+    }
+  };
+
+  const handleNext = () => {
+    if (isFormValid()) {
+      localStorage.setItem("userOnboardingStep1", JSON.stringify(formData));
+      router.push("/users/onBoarding/step-3");
+    }
+  };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#FAF5FF] via-[#EFF6FF] to-[#FDF2F8] flex items-center justify-center p-4">
-
-<div className="w-full max-w-3xl">
-
-        {/* HEADER */}
+    <div className="min-h-screen w-full bg-gradient-to-br from-[#FAF5FF] via-[#EFF6FF] to-[#FDF2F8] flex items-center justify-center p-10">
+      <div className="w-full max-w-[768px]">
+        
+        {/* Header */}
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-semibold text-gray-800">Welcome to LISTENO</h1>
-          <p className="text-gray-500 mt-2">Let's set up your profile in just a few steps</p>
+          <h1 className="text-4xl font-semibold text-[#1E2939]">Welcome to LISTENO</h1>
+          <p className="text-[#4A5565] text-sm mt-2">Let's set up your profile in just a few steps</p>
         </div>
 
-        {/* PROGRESS */}
-        <div className="mb-10">
-          <div className="flex justify-between text-sm text-gray-500 mb-2">
-            <span>Step 2 of 4</span>
-            <span className="text-purple-600 font-medium">50%</span>
+        {/* Progress */}
+        <div className="w-full mb-8">
+          <div className="flex justify-between text-sm text-gray-600 mb-2">
+            <span>Step 1 of 4</span>
+            <span className="text-purple-600 font-medium">25%</span>
           </div>
-          <div className="h-3 w-full bg-gray-200 rounded-full overflow-hidden">
-            <div className="w-1/2 h-full bg-gradient-to-r from-purple-500 to-blue-500" />
+          <div className="w-full h-3 bg-gray-200 rounded-full">
+            <div className="w-1/4 h-full bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"></div>
           </div>
         </div>
 
-        {/* CARD */}
-        <div className="bg-white shadow-xl rounded-3xl p-8 md:p-10">
+        {/* Card */}
+        <div className="w-full bg-white rounded-2xl shadow-xl p-8 md:p-9">
 
-          {/* CARD HEADER */}
-          <div className="flex items-center gap-4 mb-8">
-            <div className="bg-gradient-to-r from-purple-500 to-blue-500 p-3 rounded-xl text-white">
-              <Brain size={28} />
+          {/* Card Header */}
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white">
+              <User size={28} />
             </div>
             <div>
-              <h2 className="text-xl font-semibold text-gray-800">Areas of Interest</h2>
-              <p className="text-gray-500 text-sm">What would you like help with?</p>
+              <h2 className="text-xl font-semibold text-gray-800">Personal Information</h2>
+              <p className="text-sm text-gray-500">Tell us about yourself</p>
             </div>
           </div>
 
-          {/* CATEGORIES */}
-          <p className="text-sm text-gray-600 mb-3">Select main categories:</p>
-          <div className="grid md:grid-cols-3 gap-4 mb-10">
-            {categories.map(cat => {
-              const Icon = cat.icon;
-              const active = selectedCategories.includes(cat.name);
-              return (
-                <button
-                  key={cat.name}
-                  onClick={() => toggleCategory(cat.name)}
-                  className={`rounded-2xl p-4 flex flex-col items-center justify-center gap-3 border-2 transition-all duration-200
-                    ${active
-                      ? "border-purple-500 bg-purple-100 shadow-[0_8px_20px_rgba(124,58,237,0.25)]"
-                      : "border-gray-200 bg-white hover:border-purple-300"}`}
-                >
-                  <Icon
-                    size={30}
-                    className={`${active ? "text-purple-600" : "text-[#99A1AF]"}`}
-                  />
-                  <span
-                    className={`font-medium text-base ${
-                      active ? "text-purple-600" : "text-gray-700"
-                    }`}
-                  >
-                    {cat.name}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+          {/* Profile Photo */}
+         
+         <div className="flex flex-col items-center mb-8">
+  <div
+    className="relative w-32 h-32 rounded-full flex items-center justify-center 
+    bg-gradient-to-b from-[#F3E8FF] to-[#DBEAFE] 
+    border-5 border-[#E9D4FF] cursor-pointer"
+    onClick={() => document.getElementById("photo-upload")?.click()}
+  >
+    {formData.profilePhotoPreview ? (
+      <img
+        src={formData.profilePhotoPreview}
+        alt="Preview"
+        className="w-full h-full object-cover rounded-full"
+      />
+    ) : (
+      <User size={62} className="text-[#C27AFF]" />
+    )}
 
-          {/* TOPICS */}
-          <p className="text-sm text-[#364153] mb-3">Or select specific topics:</p>
-          <div className="grid md:grid-cols-3 gap-2">
-            {topics.map(topic => {
-              const active = selectedTopics.includes(topic);
-              return (
-                <button
-                  key={topic}
-                  onClick={() => toggleTopic(topic)}
-                  className={`rounded-xl px-4 py-2 text-sm border transition
-                    ${active
-                      ? "bg-[#9810FA] text-white border-[#9810FA]"
-                      : "bg-[#F3F4F6] text-[#364153] border-[#F3F4F6] hover:bg-[#e8e8f2]"}`}
-                      >
-                  {topic}
-                </button>
-              );
-            })}
-          </div>
-
-          
-        </div>
-        {/* FOOTER BUTTONS */}
-          <div className="flex justify-between mt-6">
-            <button
-              onClick={() => router.back()}
-              className="px-40 py-3 rounded-xl border bg-[#FFFFFF] border-[#FFFFFF] text-black hover:bg-gray-100 border-gray-300 flex items-center gap-2"
-            >
-              <ChevronLeft size={18} /> Back
-            </button>
-
-            <button
-              disabled={!isFormValid()}
-              onClick={() => router.push("/users/onBoarding/step-3")}
-              className={`px-40 py-3 rounded-xl flex items-center gap-2 text-white shadow-md
-                ${isFormValid()
-                  ? "bg-gradient-to-r from-[#9810FA] to-[#155DFC] hover:opacity-90"
-                  : "bg-gray-300 cursor-not-allowed"}`}
-            >
-              Next <ChevronRight size={18} />
-            </button>
-          </div>
-      </div>
-      
+    {/* Camera Icon */}
+    <div className="absolute bottom-0 right-0 w-10 h-10 rounded-full 
+      bg-[#9333EA] flex items-center justify-center shadow-md">
+      <Camera size={18} className="text-white" />
     </div>
+  </div>
+
+  <input
+    id="photo-upload"
+    type="file"
+    accept="image/*"
+    onChange={handlePhotoUpload}
+    className="hidden"
+  />
+
+  <p className="text-sm text-gray-500 mt-3">
+    Upload your profile photo (optional)
+  </p>
+</div>
+
+          {/* Form Fields */}
+          <div className="space-y-5">
+            <Input
+  label="Full Name *"
+  placeholder="Enter your full name"
+  value={formData.fullName}
+  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+    handleChange("fullName", e.target.value)
+  }
+/>
+
+<Input
+  label="Email *"
+  placeholder="your.email@example.com"
+  icon={<Mail size={18} />}
+  type="email"
+  value={formData.email}
+  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+    handleChange("email", e.target.value)
+  }
+/>
+
+<Input
+  label="Phone Number *"
+  placeholder="+91 98765 43210"
+  icon={<Phone size={18} />}
+  type="tel"
+  value={formData.phone}
+  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+    handleChange("phone", e.target.value)
+  }
+/>
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+  <Input
+    label="Date of Birth *"
+    type="date"
+    value={formData.dateOfBirth}
+    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+      handleChange("dateOfBirth", e.target.value)
+    }
+  />
+
+              <div>
+                <label className="text-sm font-medium text-gray-700">Gender *</label>
+                <div className="relative mt-1.5">
+                  <select value={formData.gender} onChange={(e) => handleChange("gender", e.target.value)}
+                          className="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 appearance-none cursor-pointer">
+                    <option value="" disabled>Select gender</option>
+                    {genderOptions.map(option => <option key={option}>{option}</option>)}
+                  </select>
+                  <ChevronDown size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                </div>
+              </div>
+            </div>
+
+            {/* Location */}
+            <div className="relative">
+              <Input label="Location" placeholder="City, State" icon={<MapPin size={18} />}
+                     value={formData.location} onChange={handleLocationChange} />
+              
+              {showSuggestions && locationSuggestions.length > 0 && (
+                <div className="absolute z-10 w-full mt-1 bg-white border rounded-xl shadow-lg">
+                  {locationSuggestions.map(location => (
+                    <button key={location} onClick={() => selectLocation(location)}
+                            className="w-full text-left px-4 py-2 hover:bg-purple-50 text-sm">
+                      {location}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Bio */}
+            <div>
+              <label className="text-sm font-medium text-gray-700">Bio (Optional)</label>
+              <textarea maxLength={30} value={formData.bio} onChange={(e) => handleChange("bio", e.target.value)}
+                        placeholder="Tell us a little about yourself..."
+                        className="w-full mt-2 px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 h-24 resize-none" />
+              <p className="text-xs text-gray-400 text-right mt-1">{formData.bio.length}/30</p>
+            </div>
+
+            {/* Next Button */}
+            <button onClick={handleNext} disabled={!isFormValid()}
+                    className={`w-full mt-4 py-3.5 rounded-xl font-medium transition-all ${
+                      isFormValid()
+                        ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700"
+                        : "bg-gray-200 text-gray-400 cursor-not-allowed"
+                    }`}>
+              Next →
+            </button>
+          </div>
+        </div>
+      </div>
+      </div>
   );
 }
 
-/* ---------- TEST CASES ----------
-1. Page renders header
-2. Clicking category toggles active style
-3. Next button disabled until selection
-*/
+// Reusable Input Component
+function Input({ label, placeholder, type = "text", icon, value, onChange }: any) {
+  return (
+    <div>
+      <label className="text-sm font-medium text-gray-700">{label}</label>
+      <div className="relative mt-1.5">
+        {icon && <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">{icon}</div>}
+        <input type={type} placeholder={placeholder} value={value} onChange={onChange}
+               className={`w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 outline-none focus:ring-2 focus:ring-purple-400 transition-all ${icon ? "pl-10" : ""}`} />
+      </div>
+    </div>
+  );
+}

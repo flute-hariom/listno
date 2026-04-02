@@ -13,7 +13,7 @@ export default function UnauthLayout({ children }: { children: ReactNode }) {
   // const shouldHideHeaderFooter =
   //   pathname?.includes("/coach") || pathname?.includes("/user");
 
-  const shouldHideHeaderFooter = /^\/(coach|user)(\/|$)/.test(pathname);
+  const shouldHideHeaderFooter = /^\/(coach|users)(\/|$)/.test(pathname);
 
   console.log("shouldHideHeaderFooter", shouldHideHeaderFooter);
   return (
