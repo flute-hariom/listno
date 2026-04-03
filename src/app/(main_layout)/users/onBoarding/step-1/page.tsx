@@ -1,6 +1,5 @@
 "use client";
 
-
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Languages, ChevronLeft, ChevronRight } from "lucide-react";
