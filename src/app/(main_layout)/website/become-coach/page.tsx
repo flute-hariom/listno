@@ -107,7 +107,8 @@ export default function BecomeCoachPage() {
             </p>
             <Button
               size="lg"
-              onClick={() => router.push("/coach/onboarding")}
+              // onClick={() => router.push("/coach/onboarding")}
+              onClick={() => router.push("/coach/language")}
               className="bg-white text-purple-600 hover:bg-gray-100 text-lg h-14 px-8"
             >
               Apply to Become a Coach
