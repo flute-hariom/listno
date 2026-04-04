@@ -92,7 +92,7 @@ export default function StepThree() {
   <button
     onClick={() =>
       selected.length > 0 &&
-      router.push("/users/onBoarding/step-2")
+      router.push("/users/onBoarding?step-2")
     }
     disabled={selected.length === 0}
     className={`flex-1 py-3 rounded-xl text-white shadow-md flex items-center justify-center gap-2 transition-all
