@@ -37,7 +37,7 @@ function CoachOnboardingContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [step, setStep] = useState(1);
-  const totalSteps = 8;
+  const totalSteps = 4;
   const [showTermsModal, setShowTermsModal] = useState(false);
   const [showCodeModal, setShowCodeModal] = useState(false);
 
@@ -66,6 +66,8 @@ function CoachOnboardingContent() {
     email: existingData?.email || "",
     phone: existingData?.phone || "",
     bio: existingData?.bio || "",
+    gender: existingData?.gender || "",
+   location: existingData?.location || "",
     profilePhoto: null as File | null,
     profilePhotoPreview: existingData?.profilePhotoPreview || "",
 
@@ -81,7 +83,7 @@ function CoachOnboardingContent() {
     newCertification: "",
 
     // Step 4: Languages
-    languages: existingData?.languages || ([] as string[]),
+   // languages: existingData?.languages || ([] as string[]),
 
     // Step 5: Session Types & Pricing
     sessionTypes: existingData?.sessionTypes || ([] as string[]),
@@ -106,11 +108,11 @@ function CoachOnboardingContent() {
     ifscCode: existingData?.ifscCode || "",
     bankName: existingData?.bankName || "",
     upiId: existingData?.upiId || "",
-
-    // Step 8: Terms
+ // Step 8: Terms
     agreeToTerms: editMode ? true : false,
     agreeToCode: editMode ? true : false,
   });
+   
 
   // Load from localStorage if not in edit mode
   useEffect(() => {
@@ -260,7 +262,14 @@ function CoachOnboardingContent() {
 
   const handleNext = () => {
     if (step < totalSteps) {
+       
+
+       if (step === 3) {
+      setStep(8);
+    } else {
       setStep(step + 1);
+    }
+
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       // Submit form
@@ -296,8 +305,15 @@ function CoachOnboardingContent() {
   };
 
   const handleBack = () => {
+
     if (step > 1) {
+
+     
+    if (step === 8) {
+      setStep(3); // go back to step 3
+    } else {
       setStep(step - 1);
+    }
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
@@ -363,7 +379,7 @@ function CoachOnboardingContent() {
     });
   };
 
-  const toggleLanguage = (language: string) => {
+ {/* const toggleLanguage = (language: string) => {
     if (formData.languages.includes(language)) {
       setFormData({
         ...formData,
@@ -376,7 +392,7 @@ function CoachOnboardingContent() {
       });
     }
   };
-
+ */}
   const toggleSessionType = (type: string) => {
     if (formData.sessionTypes.includes(type)) {
       setFormData({
@@ -449,7 +465,7 @@ function CoachOnboardingContent() {
     switch (step) {
       case 1:
         return (
-          formData.fullName && formData.email && formData.phone && formData.bio
+          formData.fullName && formData.email && formData.phone 
         );
       case 2:
         return (
@@ -460,8 +476,8 @@ function CoachOnboardingContent() {
         );
       case 3:
         return formData.yearsOfExperience && formData.education;
-      case 4:
-        return formData.languages.length > 0;
+      {/* case 4:
+        return formData.languages.length > 0; 
       case 5:
         return (
           formData.sessionTypes.length > 0 &&
@@ -479,7 +495,7 @@ function CoachOnboardingContent() {
           formData.accountNumber &&
           formData.ifscCode &&
           formData.bankName
-        );
+        ); */}
       case 8:
         return formData.agreeToTerms && formData.agreeToCode;
       default:
@@ -545,11 +561,11 @@ function CoachOnboardingContent() {
                 <span className="text-xs hidden md:block">
                   {s === 1 && "Info"}
                   {s === 2 && "Categories"}
-                  {s === 3 && "Experience"}
-                  {s === 4 && "Languages"}
+                   {s === 3 && "Experience"}
+                  {/*{s === 4 && "Languages"}
                   {s === 5 && "Pricing"}
                   {s === 6 && "Schedule"}
-                  {s === 7 && "Payment"}
+                  {s === 7 && "Payment"} */}
                   {s === 8 && "Review"}
                 </span>
               </div>
@@ -630,7 +646,7 @@ function CoachOnboardingContent() {
                     </div>
                   </div>
 
-                  <div>
+                  {/*<div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Professional Bio * (Max 500 characters)
                     </label>
@@ -649,7 +665,46 @@ function CoachOnboardingContent() {
                     <p className="text-sm text-gray-500 mt-1 text-right">
                       {formData.bio.length}/500
                     </p>
-                  </div>
+                  </div> */}
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+  
+  {/* Gender */}
+  <div>
+    <label className="block text-sm font-medium text-gray-700 mb-2">
+      Gender *
+    </label>
+    <select
+      value={formData.gender}
+      onChange={(e) =>
+        setFormData({ ...formData, gender: e.target.value })
+      }
+      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
+    >
+      <option value="">Select Gender</option>
+      <option value="female">Female</option>
+      <option value="male">Male</option>
+      <option value="other">Other</option>
+    </select>
+  </div>
+
+  {/* Location */}
+  <div>
+    <label className="block text-sm font-medium text-gray-700 mb-2">
+      Location *
+    </label>
+    <input
+      type="text"
+      value={formData.location}
+      onChange={(e) =>
+        setFormData({ ...formData, location: e.target.value })
+      }
+      placeholder="Enter your location"
+      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
+    />
+  </div>
+
+</div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -885,7 +940,7 @@ function CoachOnboardingContent() {
             )}
 
             {/* Step 4: Languages */}
-            {step === 4 && (
+           {/* {step === 4 && (
               <div className="space-y-6">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center">
@@ -917,10 +972,10 @@ function CoachOnboardingContent() {
                   ))}
                 </div>
               </div>
-            )}
+           )} */}
 
             {/* Step 5: Session Types & Pricing */}
-            {step === 5 && (
+           {/* {step === 5 && (
               <div className="space-y-6">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center">
@@ -1081,10 +1136,10 @@ function CoachOnboardingContent() {
                   </div>
                 </div>
               </div>
-            )}
+           )} */}
 
-            {/* Step 6: Availability Schedule */}
-            {step === 6 && (
+           {/* {/* Step 6: Availability Schedule */}
+           {/* {step === 6 && (
               <div className="space-y-6">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center">
@@ -1166,10 +1221,10 @@ function CoachOnboardingContent() {
                   )}
                 </div>
               </div>
-            )}
+            )} */}
 
             {/* Step 7: Bank Details */}
-            {step === 7 && (
+           {/* {step === 7 && (
               <div className="space-y-6">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center">
@@ -1281,7 +1336,7 @@ function CoachOnboardingContent() {
                   </div>
                 </div>
               </div>
-            )}
+           )} */}
 
             {/* Step 8: Review & Submit */}
             {step === 8 && (
@@ -1327,12 +1382,12 @@ function CoachOnboardingContent() {
                             : "-"}
                         </p>
                       </div>
-                      <div>
+                     {/* <div>
                         <p className="text-gray-600">Languages</p>
                         <p className="font-medium text-gray-800">
                           {formData.languages.join(", ") || "-"}
                         </p>
-                      </div>
+                      </div> 
                       <div>
                         <p className="text-gray-600">Categories</p>
                         <p className="font-medium text-gray-800">
@@ -1344,7 +1399,7 @@ function CoachOnboardingContent() {
                         <p className="font-medium text-gray-800">
                           {formData.sessionTypes.join(", ") || "-"}
                         </p>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
 

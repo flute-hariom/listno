@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Languages } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/src/components/ui/Button";
+import { Languages, ChevronLeft, ChevronRight } from "lucide-react";
+
 
 type Language = string;
 
@@ -13,6 +14,7 @@ const Page = () => {
   const [languages, setLanguages] = useState<Language[]>([]);
   const [selectedLanguages, setSelectedLanguages] = useState<Language[]>([]);
   const [loading, setLoading] = useState(true);
+
 
   // 🔥 API-ready (currently static)
   useEffect(() => {
@@ -96,26 +98,35 @@ const Page = () => {
       </div>
 
       {/* Bottom Section */}
-    <div className="mt-8 flex flex-col gap-4">
+    {/*<div className="mt-8 flex flex-col gap-4"> */}
   
   {/* Complete Profiles */}
-  <Button
-    size="lg"
-    onClick={() => router.push("/coach/onboarding")}
-    className="w-full bg-green-600 hover:bg-green-700 text-white text-lg h-14 rounded-xl"
+ <div className="flex justify-between mt-10 gap-4">
+  <button
+    onClick={() =>
+      selectedLanguages.length > 0 &&
+      router.push("/coach/onboarding?step=1")
+    }
+    disabled={selectedLanguages.length === 0}
+    className={`flex-1 py-3 rounded-xl text-white shadow-md flex items-center justify-center gap-2 transition-all
+      ${
+        selectedLanguages.length > 0
+          ? "bg-gradient-to-r from-purple-600 to-blue-600 hover:opacity-90"
+          : "bg-gray-300 cursor-not-allowed"
+      }`}
   >
-    Complete your profile
-  </Button>
-
-  {/* Skip to Dashboard */}
-  <Button
-    size="lg"
+    Complete your profile <ChevronRight size={18} />
+  </button>
+  <button
     onClick={() => router.push("/coach/dashboard")}
-    className="w-full bg-gradient-to-r from-purple-500 to-blue-500 text-white text-lg h-14 rounded-xl"
+    className="flex-1 py-3 rounded-xl bg-[#FFFFFF] border border-gray-300 text-black hover:bg-gray-100 flex items-center justify-center gap-2"
   >
-    Skip to dashboard
-  </Button>
+    <ChevronLeft size={18} /> Skip for now
+  </button>
+
+  
 </div>
+
     </div>
   );
 };
