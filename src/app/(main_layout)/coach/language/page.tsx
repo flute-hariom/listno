@@ -98,7 +98,7 @@ const Page = () => {
       {/* Bottom Section */}
     <div className="mt-8 flex flex-col gap-4">
   
-  {/* Complete Profile */}
+  {/* Complete Profiles */}
   <Button
     size="lg"
     onClick={() => router.push("/coach/onboarding")}
