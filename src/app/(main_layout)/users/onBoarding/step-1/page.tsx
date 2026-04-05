@@ -36,13 +36,14 @@ export default function StepThree() {
         </div>
 
         {/* PROGRESS */}
-        <div className="mb-10">
-          <div className="flex justify-between text-sm text-gray-500 mb-2">
-            <span>Step 3 of 4</span>
-            <span className="text-purple-600 font-medium">75%</span>
+       
+<div className="w-full mb-8">
+          <div className="flex justify-between text-sm text-gray-600 mb-2">
+            <span>Step 1 of 4</span>
+            <span className="text-purple-600 font-medium">25%</span>
           </div>
-          <div className="h-3 w-full bg-gray-200 rounded-full overflow-hidden">
-            <div className="w-3/4 h-full bg-gradient-to-r from-purple-500 to-blue-500" />
+          <div className="w-full h-3 bg-gray-200 rounded-full">
+            <div className="w-1/4 h-full bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"></div>
           </div>
         </div>
 
@@ -82,17 +83,11 @@ export default function StepThree() {
 
         {/* FOOTER BUTTONS */}
        <div className="flex justify-between mt-10 gap-4">
-  <button
-    onClick={() => router.push("/users/dashboard")}
-    className="flex-1 py-3 rounded-xl bg-[#FFFFFF] border border-gray-300 text-black hover:bg-gray-100 flex items-center justify-center gap-2"
-  >
-    <ChevronLeft size={18} /> Skip for now
-  </button>
 
   <button
     onClick={() =>
       selected.length > 0 &&
-      router.push("/users/onBoarding?step-2")
+      router.push("/users/onBoarding/step-2")
     }
     disabled={selected.length === 0}
     className={`flex-1 py-3 rounded-xl text-white shadow-md flex items-center justify-center gap-2 transition-all
@@ -103,6 +98,12 @@ export default function StepThree() {
       }`}
   >
     Complete your profile <ChevronRight size={18} />
+  </button>
+  <button
+    onClick={() => router.push("/users/dashboard")}
+    className="flex-1 py-3 rounded-xl bg-[#FFFFFF] border border-gray-300 text-black hover:bg-gray-100 flex items-center justify-center gap-2"
+  >
+    <ChevronLeft size={18} /> Skip to Dashboard
   </button>
 </div>
       </div>

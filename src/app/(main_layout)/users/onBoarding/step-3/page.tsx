@@ -67,7 +67,7 @@ export default function StepTwo() {
         </div>
 
         {/* PROGRESS */}
-        <div className="mb-10">
+       {/* <div className="mb-10">
           <div className="flex justify-between text-sm text-gray-500 mb-2">
             <span>Step 2 of 4</span>
             <span className="text-purple-600 font-medium">50%</span>
@@ -75,8 +75,17 @@ export default function StepTwo() {
           <div className="h-3 w-full bg-gray-200 rounded-full overflow-hidden">
             <div className="w-1/2 h-full bg-gradient-to-r from-purple-500 to-blue-500" />
           </div>
+        </div> */}
+         <div className="mb-10">
+          <div className="flex justify-between text-sm text-gray-500 mb-2">
+            <span>Step 3 of 4</span>
+            <span className="text-purple-600 font-medium">75%</span>
+          </div>
+          <div className="h-3 w-full bg-gray-200 rounded-full overflow-hidden">
+            <div className="w-3/4 h-full bg-gradient-to-r from-purple-500 to-blue-500" />
+          </div>
         </div>
-
+ 
         {/* CARD */}
         <div className="bg-white shadow-xl rounded-3xl p-8 md:p-10">
 

@@ -61,7 +61,8 @@ export default function StepFour() {
           <div className="w-full h-3 bg-gray-200 rounded-full">
             <div className="h-3 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 w-full"></div>
           </div>
-        </div>
+        </div> 
+        
 
         {/* Card */}
         <div className="bg-white p-10 rounded-3xl shadow-xl">

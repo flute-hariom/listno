@@ -93,13 +93,22 @@ export default function StepOne() {
         </div>
 
         {/* Progress */}
-        <div className="w-full mb-8">
+        {/* <div className="w-full mb-8">
           <div className="flex justify-between text-sm text-gray-600 mb-2">
             <span>Step 1 of 4</span>
             <span className="text-purple-600 font-medium">25%</span>
           </div>
           <div className="w-full h-3 bg-gray-200 rounded-full">
             <div className="w-1/4 h-full bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"></div>
+          </div>
+        </div> */}
+         <div className="mb-10">
+          <div className="flex justify-between text-sm text-gray-500 mb-2">
+            <span>Step 2 of 4</span>
+            <span className="text-purple-600 font-medium">50%</span>
+          </div>
+          <div className="h-3 w-full bg-gray-200 rounded-full overflow-hidden">
+            <div className="w-1/2 h-full bg-gradient-to-r from-purple-500 to-blue-500" />
           </div>
         </div>
 
