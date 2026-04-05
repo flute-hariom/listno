@@ -5,6 +5,8 @@ import { useRouter, usePathname } from "next/navigation";
 import { Heart, Menu, X, Briefcase } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useGoogleLogin } from "@react-oauth/google";
+import { useDispatch } from "react-redux";
+
 import LoginModal from "./LoginModal";
 
 export default function Header({ onLoginClick }: any) {
@@ -12,6 +14,8 @@ export default function Header({ onLoginClick }: any) {
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+
+  const dispatch = useDispatch();
 
   const isActive = (path: string) => pathname === path;
 
@@ -84,7 +88,7 @@ export default function Header({ onLoginClick }: any) {
             <button
               // onClick={() => router.push("/coach/dashboard")}
               onClick={() => router.push("/website/become-coach")}
-              className="px-4 py-2 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg font-medium hover:shadow-lg transition-all flex items-center gap-2"
+              className="cursor-pointer px-4 py-2 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg font-medium hover:shadow-lg transition-all flex items-center gap-2"
             >
               <Briefcase className="w-4 h-4" />
               Become a Coach
@@ -147,7 +151,7 @@ export default function Header({ onLoginClick }: any) {
                   setMobileMenuOpen(false);
                   router.push("/coach/dashboard");
                 }}
-                className="w-full px-4 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg font-medium hover:shadow-lg transition-all flex items-center justify-center gap-2"
+                className="cursor-pointer w-full px-4 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg font-medium hover:shadow-lg transition-all flex items-center justify-center gap-2"
               >
                 <Briefcase className="w-5 h-5" />
                 Become a Coach

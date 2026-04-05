@@ -30,7 +30,10 @@ export default function RootLayout({
             "bg-white text-black min-h-screen m-0 flex place-items-center min-w-[320px]"
           }
         >
-          <ReduxProvider>{children}</ReduxProvider>
+          
+          <ReduxProvider>
+            {children}
+            </ReduxProvider>
         </body>
       </GoogleOAuthProvider>
     </html>

@@ -107,8 +107,9 @@ export default function BecomeCoachPage() {
             </p>
             <Button
               size="lg"
-              onClick={() => router.push("/coach/onboarding")}
-              className="bg-white text-purple-600 hover:bg-gray-100 text-lg h-14 px-8"
+              // onClick={() => router.push("/coach/onboarding")}
+              onClick={() => router.push("/coach/language")}
+              className="bg-white text-purple-600 hover:bg-gray-100 text-lg h-14 px-8 cursor-pointer"
             >
               Apply to Become a Coach
             </Button>
@@ -229,7 +230,7 @@ export default function BecomeCoachPage() {
           <Button
             size="lg"
             onClick={() => router.push("/coach/onboarding")}
-            className="bg-white text-purple-600 hover:bg-gray-100 text-lg h-14 px-8"
+            className="bg-white text-purple-600 hover:bg-gray-100 text-lg h-14 px-8 cursor-pointer"
           >
             Apply to Become a Coach
           </Button>
