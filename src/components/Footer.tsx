@@ -78,7 +78,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/website/become-coach"
-                  className="text-purple-200 hover:text-white text-sm transition-colors"
+                  className="text-purple-200 hover:text-white text-sm transition-colors cursor-pointer"
                 >
                   Become a Coach
                 </Link>
