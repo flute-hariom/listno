@@ -60,7 +60,7 @@ export default function Header({ onLoginClick }: any) {
             <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
               LISTENO
             </span>
-          </Link> 
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
@@ -88,7 +88,7 @@ export default function Header({ onLoginClick }: any) {
             <button
               // onClick={() => router.push("/coach/dashboard")}
               onClick={() => router.push("/website/become-coach")}
-              className="px-4 py-2 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg font-medium hover:shadow-lg transition-all flex items-center gap-2"
+              className="cursor-pointer px-4 py-2 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg font-medium hover:shadow-lg transition-all flex items-center gap-2"
             >
               <Briefcase className="w-4 h-4" />
               Become a Coach
@@ -151,7 +151,7 @@ export default function Header({ onLoginClick }: any) {
                   setMobileMenuOpen(false);
                   router.push("/coach/dashboard");
                 }}
-                className="w-full px-4 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg font-medium hover:shadow-lg transition-all flex items-center justify-center gap-2"
+                className="cursor-pointer w-full px-4 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg font-medium hover:shadow-lg transition-all flex items-center justify-center gap-2"
               >
                 <Briefcase className="w-5 h-5" />
                 Become a Coach
