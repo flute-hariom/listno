@@ -6,7 +6,6 @@ import { Heart, Menu, X, Briefcase } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
-
 import LoginModal from "./LoginModal";
 
 export default function Header({ onLoginClick }: any) {
