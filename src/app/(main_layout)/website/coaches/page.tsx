@@ -142,7 +142,7 @@ export default function CoachesPage() {
       </section>
 
       {/* Filters */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 relative z-10">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10">
   <div className="bg-white rounded-2xl shadow-xl p-4 border border-gray-200">
     
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 items-center">
@@ -179,19 +179,19 @@ export default function CoachesPage() {
           avoidCollisions={false}
           className="bg-white border border-gray-200 rounded-xl shadow-lg animate-in fade-in zoom-in-95"
         >
-          <SelectItem className="text-black hover:bg-purple-50" value="all">
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="all">
             All Categories
           </SelectItem>
-          <SelectItem className="text-black hover:bg-purple-50" value="relationships">
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="relationships">
             Relationships
           </SelectItem>
-          <SelectItem className="text-black hover:bg-purple-50" value="career">
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="career">
             Career
           </SelectItem>
-          <SelectItem className="text-black hover:bg-purple-50" value="wellness">
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="wellness">
             Wellness
           </SelectItem>
-          <SelectItem className="text-black hover:bg-purple-50" value="parenting">
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="parenting">
             Parenting
           </SelectItem>
         </SelectContent>
@@ -214,22 +214,22 @@ export default function CoachesPage() {
           avoidCollisions={false}
           className="bg-white border border-gray-200 rounded-xl shadow-lg animate-in fade-in zoom-in-95"
         >
-          <SelectItem className="text-black hover:bg-purple-50" value="all">
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="all">
             All Languages
           </SelectItem>
-          <SelectItem className="text-black hover:bg-purple-50" value="English">
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="English">
             English
           </SelectItem>
-          <SelectItem className="text-black hover:bg-purple-50" value="Hindi">
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="Hindi">
             Hindi
           </SelectItem>
-          <SelectItem className="text-black hover:bg-purple-50" value="Bengali">
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="Bengali">
             Bengali
           </SelectItem>
-          <SelectItem className="text-black hover:bg-purple-50" value="Gujarati">
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="Gujarati">
             Gujarati
           </SelectItem>
-          <SelectItem className="text-black hover:bg-purple-50" value="Punjabi">
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="Punjabi">
             Punjabi
           </SelectItem>
         </SelectContent>
@@ -255,13 +255,13 @@ export default function CoachesPage() {
           avoidCollisions={false}
           className="bg-white border border-gray-200 rounded-xl shadow-lg animate-in fade-in zoom-in-95"
         >
-          <SelectItem className="text-black hover:bg-purple-50" value="all">
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="all">
             All Status
           </SelectItem>
-          <SelectItem className="text-black hover:bg-purple-50" value="online">
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="online">
             Online Now
           </SelectItem>
-          <SelectItem className="text-black hover:bg-purple-50" value="offline">
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="offline">
             Offline
           </SelectItem>
         </SelectContent>
