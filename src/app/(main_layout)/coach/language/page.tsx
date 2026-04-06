@@ -126,7 +126,6 @@ const Page = () => {
               Complete your Profile <ChevronRight size={18} />
             </button>
           </div>
-
         </div>
       </div>
     </div>
