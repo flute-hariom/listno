@@ -67,7 +67,7 @@ function CoachOnboardingContent() {
     phone: existingData?.phone || "",
     bio: existingData?.bio || "",
     gender: existingData?.gender || "",
-   location: existingData?.location || "",
+    location: existingData?.location || "",
     profilePhoto: null as File | null,
     profilePhotoPreview: existingData?.profilePhotoPreview || "",
 
@@ -83,7 +83,7 @@ function CoachOnboardingContent() {
     newCertification: "",
 
     // Step 4: Languages
-   // languages: existingData?.languages || ([] as string[]),
+    // languages: existingData?.languages || ([] as string[]),
 
     // Step 5: Session Types & Pricing
     sessionTypes: existingData?.sessionTypes || ([] as string[]),
@@ -108,11 +108,10 @@ function CoachOnboardingContent() {
     ifscCode: existingData?.ifscCode || "",
     bankName: existingData?.bankName || "",
     upiId: existingData?.upiId || "",
- // Step 8: Terms
+    // Step 8: Terms
     agreeToTerms: editMode ? true : false,
     agreeToCode: editMode ? true : false,
   });
-   
 
   // Load from localStorage if not in edit mode
   useEffect(() => {
@@ -262,13 +261,11 @@ function CoachOnboardingContent() {
 
   const handleNext = () => {
     if (step < totalSteps) {
-       
-
-       if (step === 3) {
-      setStep(8);
-    } else {
-      setStep(step + 1);
-    }
+      if (step === 5) {
+        setStep(7);
+      } else {
+        setStep(step + 1);
+      }
 
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
@@ -305,15 +302,12 @@ function CoachOnboardingContent() {
   };
 
   const handleBack = () => {
-
     if (step > 1) {
-
-     
-    if (step === 8) {
-      setStep(3); // go back to step 3
-    } else {
-      setStep(step - 1);
-    }
+      if (step === 8) {
+        setStep(3); // go back to step 3
+      } else {
+        setStep(step - 1);
+      }
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
@@ -323,7 +317,7 @@ function CoachOnboardingContent() {
       setFormData({
         ...formData,
         selectedCategories: formData.selectedCategories.filter(
-          (name :any) => name !== categoryName,
+          (name: any) => name !== categoryName,
         ),
         selectedSubcategories: {
           ...formData.selectedSubcategories,
@@ -345,7 +339,9 @@ function CoachOnboardingContent() {
         ...formData,
         selectedSubcategories: {
           ...formData.selectedSubcategories,
-          [categoryName]: current.filter((name :any) => name !== subcategoryName),
+          [categoryName]: current.filter(
+            (name: any) => name !== subcategoryName,
+          ),
         },
       });
     } else {
@@ -375,11 +371,14 @@ function CoachOnboardingContent() {
   const removeCertification = (index: number) => {
     setFormData({
       ...formData,
-      certifications: formData.certifications.filter((_ :any, i :any) => i !== index),
+      certifications: formData.certifications.filter(
+        (_: any, i: any) => i !== index,
+      ),
     });
   };
 
- {/* const toggleLanguage = (language: string) => {
+  {
+    /* const toggleLanguage = (language: string) => {
     if (formData.languages.includes(language)) {
       setFormData({
         ...formData,
@@ -392,12 +391,13 @@ function CoachOnboardingContent() {
       });
     }
   };
- */}
+ */
+  }
   const toggleSessionType = (type: string) => {
     if (formData.sessionTypes.includes(type)) {
       setFormData({
         ...formData,
-        sessionTypes: formData.sessionTypes.filter((t :any) => t !== type),
+        sessionTypes: formData.sessionTypes.filter((t: any) => t !== type),
       });
     } else {
       setFormData({
@@ -432,7 +432,7 @@ function CoachOnboardingContent() {
           ...formData.availability,
           [day]: {
             ...formData.availability[day],
-            slots: currentSlots.filter((s :any) => s !== slot),
+            slots: currentSlots.filter((s: any) => s !== slot),
           },
         },
       });
@@ -464,19 +464,18 @@ function CoachOnboardingContent() {
   const isStepValid = () => {
     switch (step) {
       case 1:
-        return (
-          formData.fullName && formData.email && formData.phone 
-        );
+        return formData.fullName && formData.email && formData.phone;
       case 2:
         return (
           formData.selectedCategories.length > 0 &&
           Object.values(formData.selectedSubcategories).some(
-            (subs :any) => subs.length > 0,
+            (subs: any) => subs.length > 0,
           )
         );
       case 3:
         return formData.yearsOfExperience && formData.education;
-      {/* case 4:
+        {
+          /* case 4:
         return formData.languages.length > 0; 
       case 5:
         return (
@@ -495,7 +494,8 @@ function CoachOnboardingContent() {
           formData.accountNumber &&
           formData.ifscCode &&
           formData.bankName
-        ); */}
+        ); */
+        }
       case 8:
         return formData.agreeToTerms && formData.agreeToCode;
       default:
@@ -561,7 +561,8 @@ function CoachOnboardingContent() {
                 <span className="text-xs hidden md:block">
                   {s === 1 && "Info"}
                   {s === 2 && "Categories"}
-                   {s === 3 && "Experience"}
+                  {/* {s === 3 && "Experience"} */}
+                  {s === 3 && "Bank Details"}
                   {/*{s === 4 && "Languages"}
                   {s === 5 && "Pricing"}
                   {s === 6 && "Schedule"}
@@ -646,7 +647,7 @@ function CoachOnboardingContent() {
                     </div>
                   </div>
 
-                  {/*<div>
+                  <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Professional Bio * (Max 500 characters)
                     </label>
@@ -665,46 +666,44 @@ function CoachOnboardingContent() {
                     <p className="text-sm text-gray-500 mt-1 text-right">
                       {formData.bio.length}/500
                     </p>
-                  </div> */}
+                  </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-  
-  {/* Gender */}
-  <div>
-    <label className="block text-sm font-medium text-gray-700 mb-2">
-      Gender *
-    </label>
-    <select
-      value={formData.gender}
-      onChange={(e) =>
-        setFormData({ ...formData, gender: e.target.value })
-      }
-      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
-    >
-      <option value="">Select Gender</option>
-      <option value="female">Female</option>
-      <option value="male">Male</option>
-      <option value="other">Other</option>
-    </select>
-  </div>
+                    {/* Gender */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Gender *
+                      </label>
+                      <select
+                        value={formData.gender}
+                        onChange={(e) =>
+                          setFormData({ ...formData, gender: e.target.value })
+                        }
+                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
+                      >
+                        <option value="">Select Gender</option>
+                        <option value="female">Female</option>
+                        <option value="male">Male</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
 
-  {/* Location */}
-  <div>
-    <label className="block text-sm font-medium text-gray-700 mb-2">
-      Location *
-    </label>
-    <input
-      type="text"
-      value={formData.location}
-      onChange={(e) =>
-        setFormData({ ...formData, location: e.target.value })
-      }
-      placeholder="Enter your location"
-      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
-    />
-  </div>
-
-</div>
+                    {/* Location */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Location *
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.location}
+                        onChange={(e) =>
+                          setFormData({ ...formData, location: e.target.value })
+                        }
+                        placeholder="Enter your location"
+                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
+                      />
+                    </div>
+                  </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -840,107 +839,365 @@ function CoachOnboardingContent() {
 
             {/* Step 3: Experience & Credentials */}
             {step === 3 && (
+              // <div className="space-y-6">
+              //   <div className="flex items-center gap-4 mb-6">
+              //     <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center">
+              //       <GraduationCap className="w-7 h-7 text-white" />
+              //     </div>
+              //     <div>
+              //       <h2 className="text-2xl font-bold text-gray-800">
+              //         Experience & Credentials
+              //       </h2>
+              //       <p className="text-gray-600">Share your qualifications</p>
+              //     </div>
+              //   </div>
+
+              //   <div className="space-y-4">
+              //     <div>
+              //       <label className="block text-sm font-medium text-gray-700 mb-2">
+              //         Years of Experience *
+              //       </label>
+              //       <input
+              //         type="number"
+              //         value={formData.yearsOfExperience}
+              //         onChange={(e) =>
+              //           setFormData({
+              //             ...formData,
+              //             yearsOfExperience: e.target.value,
+              //           })
+              //         }
+              //         placeholder="e.g., 5"
+              //         min="0"
+              //         className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
+              //       />
+              //     </div>
+
+              //     <div>
+              //       <label className="block text-sm font-medium text-gray-700 mb-2">
+              //         Education Background *
+              //       </label>
+              //       <textarea
+              //         value={formData.education}
+              //         onChange={(e) =>
+              //           setFormData({ ...formData, education: e.target.value })
+              //         }
+              //         placeholder="e.g., Master's in Psychology, Harvard University"
+              //         className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none resize-none transition-colors"
+              //         rows={3}
+              //       />
+              //     </div>
+
+              //     <div>
+              //       <label className="block text-sm font-medium text-gray-700 mb-2">
+              //         Certifications & Licenses
+              //       </label>
+              //       <div className="space-y-2">
+              //         {formData.certifications.map((cert: string, index: number) => (
+              //           <div
+              //             key={index}
+              //             className="flex items-center gap-2 p-3 bg-purple-50 rounded-lg border border-purple-200"
+              //           >
+              //             <Shield className="w-4 h-4 text-purple-600 flex-shrink-0" />
+              //             <span className="flex-1 text-sm text-gray-700">
+              //               {cert}
+              //             </span>
+              //             <button
+              //               onClick={() => removeCertification(index)}
+              //               className="text-red-500 hover:text-red-700 transition-colors"
+              //             >
+              //               <X className="w-4 h-4" />
+              //             </button>
+              //           </div>
+              //         ))}
+              //       </div>
+              //       <div className="flex gap-2 mt-2">
+              //         <input
+              //           type="text"
+              //           value={formData.newCertification}
+              //           onChange={(e) =>
+              //             setFormData({
+              //               ...formData,
+              //               newCertification: e.target.value,
+              //             })
+              //           }
+              //           onKeyPress={(e) =>
+              //             e.key === "Enter" && addCertification()
+              //           }
+              //           placeholder="Add certification (e.g., Licensed Therapist, CBT Certified)"
+              //           className="flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
+              //         />
+              //         <Button
+              //           onClick={addCertification}
+              //           className="bg-purple-600 hover:bg-purple-700"
+              //         >
+              //           <Plus className="w-5 h-5" />
+              //         </Button>
+              //       </div>
+              //     </div>
+              //   </div>
+              // </div>
               <div className="space-y-6">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center">
-                    <GraduationCap className="w-7 h-7 text-white" />
+                    <CreditCard className="w-7 h-7 text-white" />
                   </div>
                   <div>
                     <h2 className="text-2xl font-bold text-gray-800">
-                      Experience & Credentials
+                      Payment Details
                     </h2>
-                    <p className="text-gray-600">Share your qualifications</p>
+                    <p className="text-gray-600">
+                      Add your bank account for receiving payments
+                    </p>
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Years of Experience *
+                      Account Holder Name *
                     </label>
                     <input
-                      type="number"
-                      value={formData.yearsOfExperience}
+                      type="text"
+                      value={formData.accountHolderName}
                       onChange={(e) =>
                         setFormData({
                           ...formData,
-                          yearsOfExperience: e.target.value,
+                          accountHolderName: e.target.value,
                         })
                       }
-                      placeholder="e.g., 5"
-                      min="0"
+                      placeholder="As per bank account"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Account Number *
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.accountNumber}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            accountNumber: e.target.value,
+                          })
+                        }
+                        placeholder="XXXXXXXXXXXX"
+                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        IFSC Code *
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.ifscCode}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            ifscCode: e.target.value.toUpperCase(),
+                          })
+                        }
+                        placeholder="ABCD0123456"
+                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Bank Name *
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.bankName}
+                      onChange={(e) =>
+                        setFormData({ ...formData, bankName: e.target.value })
+                      }
+                      placeholder="e.g., State Bank of India"
                       className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
                     />
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Education Background *
+                      UPI ID (Optional)
                     </label>
-                    <textarea
-                      value={formData.education}
+                    <input
+                      type="text"
+                      value={formData.upiId}
                       onChange={(e) =>
-                        setFormData({ ...formData, education: e.target.value })
+                        setFormData({ ...formData, upiId: e.target.value })
                       }
-                      placeholder="e.g., Master's in Psychology, Harvard University"
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none resize-none transition-colors"
-                      rows={3}
+                      placeholder="yourname@upi"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
                     />
                   </div>
 
+                  <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4">
+                    <p className="text-sm text-yellow-900">
+                      <strong>Security:</strong> Your banking information is
+                      encrypted and stored securely. It will only be used for
+                      transferring your coaching earnings.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {step === 4 && (
+              <div className="space-y-6">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center">
+                    <FileText className="w-7 h-7 text-white" />
+                  </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Certifications & Licenses
-                    </label>
-                    <div className="space-y-2">
-                      {formData.certifications.map((cert: string, index: number) => (
-                        <div
-                          key={index}
-                          className="flex items-center gap-2 p-3 bg-purple-50 rounded-lg border border-purple-200"
+                    <h2 className="text-2xl font-bold text-gray-800">
+                      Review & Submit
+                    </h2>
+                    <p className="text-gray-600">
+                      Almost there! Review and accept our terms
+                    </p>
+                  </div>
+                </div>
+
+                {/* Summary */}
+                <div className="space-y-4">
+                  <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl p-6 border border-purple-200">
+                    <h3 className="font-bold text-gray-800 mb-4">
+                      Your Profile Summary
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                      <div>
+                        <p className="text-gray-600">Name</p>
+                        <p className="font-medium text-gray-800">
+                          {formData.fullName || "-"}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-gray-600">Email</p>
+                        <p className="font-medium text-gray-800">
+                          {formData.email || "-"}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-gray-600">Experience</p>
+                        <p className="font-medium text-gray-800">
+                          {formData.yearsOfExperience
+                            ? `${formData.yearsOfExperience} years`
+                            : "-"}
+                        </p>
+                      </div>
+                      {/* <div>
+                        <p className="text-gray-600">Languages</p>
+                        <p className="font-medium text-gray-800">
+                          {formData.languages.join(", ") || "-"}
+                        </p>
+                      </div> 
+                      <div>
+                        <p className="text-gray-600">Categories</p>
+                        <p className="font-medium text-gray-800">
+                          {formData.selectedCategories.length} selected
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-gray-600">Session Types</p>
+                        <p className="font-medium text-gray-800">
+                          {formData.sessionTypes.join(", ") || "-"}
+                        </p>
+                      </div> */}
+                    </div>
+                  </div>
+
+                  {/* Terms & Conditions */}
+                  <div className="space-y-3">
+                    <div className="p-4 border-2 border-gray-200 rounded-xl hover:border-purple-400 transition-colors">
+                      <div className="flex items-start justify-between gap-3 mb-2">
+                        <label className="flex items-start gap-3 cursor-pointer flex-1">
+                          <input
+                            type="checkbox"
+                            checked={formData.agreeToTerms}
+                            onChange={(e) =>
+                              setFormData({
+                                ...formData,
+                                agreeToTerms: e.target.checked,
+                              })
+                            }
+                            className="w-5 h-5 mt-0.5 rounded border-gray-300 text-purple-600 focus:ring-purple-500"
+                          />
+                          <div className="flex-1">
+                            <p className="font-medium text-gray-800">
+                              I agree to the Terms & Conditions *
+                            </p>
+                            <p className="text-sm text-gray-600 mt-1">
+                              I have read and accept all terms and conditions of
+                              Listno&apos;s coach agreement
+                            </p>
+                          </div>
+                        </label>
+                        <button
+                          onClick={() => setShowTermsModal(true)}
+                          className="flex items-center gap-1 px-3 py-1.5 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200 transition-colors text-sm font-medium whitespace-nowrap"
                         >
-                          <Shield className="w-4 h-4 text-purple-600 flex-shrink-0" />
-                          <span className="flex-1 text-sm text-gray-700">
-                            {cert}
-                          </span>
-                          <button
-                            onClick={() => removeCertification(index)}
-                            className="text-red-500 hover:text-red-700 transition-colors"
-                          >
-                            <X className="w-4 h-4" />
-                          </button>
-                        </div>
-                      ))}
+                          <Eye className="w-4 h-4" />
+                          Read
+                        </button>
+                      </div>
                     </div>
-                    <div className="flex gap-2 mt-2">
-                      <input
-                        type="text"
-                        value={formData.newCertification}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            newCertification: e.target.value,
-                          })
-                        }
-                        onKeyPress={(e) =>
-                          e.key === "Enter" && addCertification()
-                        }
-                        placeholder="Add certification (e.g., Licensed Therapist, CBT Certified)"
-                        className="flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
-                      />
-                      <Button
-                        onClick={addCertification}
-                        className="bg-purple-600 hover:bg-purple-700"
-                      >
-                        <Plus className="w-5 h-5" />
-                      </Button>
+
+                    <div className="p-4 border-2 border-gray-200 rounded-xl hover:border-purple-400 transition-colors">
+                      <div className="flex items-start justify-between gap-3 mb-2">
+                        <label className="flex items-start gap-3 cursor-pointer flex-1">
+                          <input
+                            type="checkbox"
+                            checked={formData.agreeToCode}
+                            onChange={(e) =>
+                              setFormData({
+                                ...formData,
+                                agreeToCode: e.target.checked,
+                              })
+                            }
+                            className="w-5 h-5 mt-0.5 rounded border-gray-300 text-purple-600 focus:ring-purple-500"
+                          />
+                          <div className="flex-1">
+                            <p className="font-medium text-gray-800">
+                              I agree to the Code of Conduct *
+                            </p>
+                            <p className="text-sm text-gray-600 mt-1">
+                              I will maintain professional standards and ethical
+                              practices in all coaching sessions
+                            </p>
+                          </div>
+                        </label>
+                        <button
+                          onClick={() => setShowCodeModal(true)}
+                          className="flex items-center gap-1 px-3 py-1.5 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200 transition-colors text-sm font-medium whitespace-nowrap"
+                        >
+                          <Eye className="w-4 h-4" />
+                          Read
+                        </button>
+                      </div>
                     </div>
+                  </div>
+
+                  <div className="bg-green-50 border border-green-200 rounded-xl p-4">
+                    <p className="text-sm text-green-900">
+                      <strong>What&apos;s next?</strong> After submission, our
+                      team will review your profile within 24-48 hours.
+                      You&apos;ll receive an email once approved, and you can
+                      start accepting coaching sessions!
+                    </p>
                   </div>
                 </div>
               </div>
             )}
 
             {/* Step 4: Languages */}
-           {/* {step === 4 && (
+            {/* {step === 4 && (
               <div className="space-y-6">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center">
@@ -975,7 +1232,7 @@ function CoachOnboardingContent() {
            )} */}
 
             {/* Step 5: Session Types & Pricing */}
-           {/* {step === 5 && (
+            {/* {step === 5 && (
               <div className="space-y-6">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center">
@@ -1138,8 +1395,8 @@ function CoachOnboardingContent() {
               </div>
            )} */}
 
-           {/* {/* Step 6: Availability Schedule */}
-           {/* {step === 6 && (
+            {/* {/* Step 6: Availability Schedule */}
+            {/* {step === 6 && (
               <div className="space-y-6">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center">
@@ -1224,7 +1481,7 @@ function CoachOnboardingContent() {
             )} */}
 
             {/* Step 7: Bank Details */}
-           {/* {step === 7 && (
+            {/* {step === 7 && (
               <div className="space-y-6">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center">
@@ -1339,7 +1596,7 @@ function CoachOnboardingContent() {
            )} */}
 
             {/* Step 8: Review & Submit */}
-            {step === 8 && (
+            {/* {step === 8 && (
               <div className="space-y-6">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center">
@@ -1355,7 +1612,7 @@ function CoachOnboardingContent() {
                   </div>
                 </div>
 
-                {/* Summary */}
+               
                 <div className="space-y-4">
                   <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl p-6 border border-purple-200">
                     <h3 className="font-bold text-gray-800 mb-4">
@@ -1382,28 +1639,11 @@ function CoachOnboardingContent() {
                             : "-"}
                         </p>
                       </div>
-                     {/* <div>
-                        <p className="text-gray-600">Languages</p>
-                        <p className="font-medium text-gray-800">
-                          {formData.languages.join(", ") || "-"}
-                        </p>
-                      </div> 
-                      <div>
-                        <p className="text-gray-600">Categories</p>
-                        <p className="font-medium text-gray-800">
-                          {formData.selectedCategories.length} selected
-                        </p>
-                      </div>
-                      <div>
-                        <p className="text-gray-600">Session Types</p>
-                        <p className="font-medium text-gray-800">
-                          {formData.sessionTypes.join(", ") || "-"}
-                        </p>
-                      </div> */}
+                   
                     </div>
                   </div>
 
-                  {/* Terms & Conditions */}
+                
                   <div className="space-y-3">
                     <div className="p-4 border-2 border-gray-200 rounded-xl hover:border-purple-400 transition-colors">
                       <div className="flex items-start justify-between gap-3 mb-2">
@@ -1484,7 +1724,7 @@ function CoachOnboardingContent() {
                   </div>
                 </div>
               </div>
-            )}
+            )} */}
           </motion.div>
         </AnimatePresence>
 
@@ -1887,7 +2127,13 @@ function CoachOnboardingContent() {
 
 export default function CoachOnboarding() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-8 px-4 flex items-center justify-center"><div className="text-purple-600">Loading...</div></div>}>
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-8 px-4 flex items-center justify-center">
+          <div className="text-purple-600">Loading...</div>
+        </div>
+      }
+    >
       <CoachOnboardingContent />
     </Suspense>
   );
