@@ -235,7 +235,7 @@ export default function CoachesPage() {
         </SelectContent>
       </Select>
 
-      {/* Status */}
+      {/* Statuss */}
       <Select
         value={selectedAvailability}
         onValueChange={setSelectedAvailability}
