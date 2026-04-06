@@ -97,14 +97,16 @@ const Page = () => {
               })}
             </div>
           )}
-
+<p className="text-gray-500 text-sm mt-6">
+  Complete your profile in around 5 minutes to become more visible and build more trust with users
+</p>
           {/* Bottom Buttons */}
           <div className="flex justify-between mt-8 gap-4">
             
             {/* Skip Button */}
             <button
               onClick={() => router.push("/coach/dashboard")}
-              className="flex-1 py-3 rounded-xl bg-white border border-gray-300 text-black hover:bg-gray-100 flex items-center justify-center gap-2"
+              className="cursor-pointer flex-1 py-3 rounded-xl bg-white border border-gray-300 text-black hover:bg-gray-100 flex items-center justify-center gap-2"
             >
               <ChevronLeft size={18} /> Skip to Dashboard
             </button>
@@ -119,7 +121,7 @@ const Page = () => {
               className={`flex-1 py-3 rounded-xl text-white shadow-md flex items-center justify-center gap-2 transition-all
                 ${
                   selectedLanguages.length > 0
-                    ? "bg-gradient-to-r from-purple-600 to-blue-600 hover:opacity-90"
+                    ? "cursor-pointer bg-gradient-to-r from-purple-600 to-blue-600 hover:opacity-90"
                     : "bg-gray-300 cursor-not-allowed"
                 }`}
             >

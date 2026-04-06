@@ -122,7 +122,7 @@ export default function CoachesPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
-      {/* Hero */}
+{/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-purple-600 via-blue-600 to-pink-600">
         <div className="absolute inset-0 bg-white/10 backdrop-blur-sm" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative">
@@ -142,72 +142,134 @@ export default function CoachesPage() {
       </section>
 
       {/* Filters */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8">
-        <div className="bg-white rounded-2xl shadow-xl p-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-            <div className="lg:col-span-2">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <Input
-                  type="text"
-                  placeholder="Search by name or expertise..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 h-12"
-                />
-              </div>
-            </div>
-
-            <Select
-              value={selectedCategory}
-              onValueChange={setSelectedCategory}
-            >
-              <SelectTrigger className="h-12">
-                <SelectValue placeholder="Category" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Categories</SelectItem>
-                <SelectItem value="relationships">Relationships</SelectItem>
-                <SelectItem value="career">Career</SelectItem>
-                <SelectItem value="wellness">Wellness</SelectItem>
-                <SelectItem value="parenting">Parenting</SelectItem>
-              </SelectContent>
-            </Select>
-
-            <Select
-              value={selectedLanguage}
-              onValueChange={setSelectedLanguage}
-            >
-              <SelectTrigger className="h-12">
-                <SelectValue placeholder="Language" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Languages</SelectItem>
-                <SelectItem value="English">English</SelectItem>
-                <SelectItem value="Hindi">Hindi</SelectItem>
-                <SelectItem value="Bengali">Bengali</SelectItem>
-                <SelectItem value="Gujarati">Gujarati</SelectItem>
-                <SelectItem value="Punjabi">Punjabi</SelectItem>
-              </SelectContent>
-            </Select>
-
-            <Select
-              value={selectedAvailability}
-              onValueChange={setSelectedAvailability}
-            >
-              <SelectTrigger className="h-12">
-                <SelectValue placeholder="Availability" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Status</SelectItem>
-                <SelectItem value="online">Online Now</SelectItem>
-                <SelectItem value="offline">Offline</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10">
+  <div className="bg-white rounded-2xl shadow-xl p-4 border border-gray-200">
+    
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 items-center">
+      
+      {/* Search */}
+      <div className="lg:col-span-2">
+        <div className="relative">
+          <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+          
+          <Input
+            type="text"
+            placeholder="Search by name or expertise..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="pl-14 pr-4 h-12 rounded-xl bg-gray-100 border border-gray-200 focus:ring-2 focus:ring-purple-500 focus:outline-none"
+          />
         </div>
-      </section>
+      </div>
 
+      {/* Category */}
+      <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+        <SelectTrigger
+          className="h-12 rounded-xl bg-gray-100 border border-gray-200 px-4 outline-none
+          focus:ring-2 focus:ring-purple-500
+          data-[state=open]:ring-2 data-[state=open]:ring-purple-500"
+        >
+          <SelectValue placeholder="All Categories" />
+        </SelectTrigger>
+
+        <SelectContent
+          side="bottom"
+          sideOffset={8}
+          align="start"
+          avoidCollisions={false}
+          className="bg-white border border-gray-200 rounded-xl shadow-lg animate-in fade-in zoom-in-95"
+        >
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="all">
+            All Categories
+          </SelectItem>
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="relationships">
+            Relationships
+          </SelectItem>
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="career">
+            Career
+          </SelectItem>
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="wellness">
+            Wellness
+          </SelectItem>
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="parenting">
+            Parenting
+          </SelectItem>
+        </SelectContent>
+      </Select>
+
+      {/* Language */}
+      <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
+        <SelectTrigger
+          className="h-12 rounded-xl bg-gray-100 border border-gray-200 px-4 outline-none
+          focus:ring-2 focus:ring-purple-500
+          data-[state=open]:ring-2 data-[state=open]:ring-purple-500"
+        >
+          <SelectValue placeholder="All Languages" />
+        </SelectTrigger>
+
+        <SelectContent
+          side="bottom"
+          sideOffset={8}
+          align="start"
+          avoidCollisions={false}
+          className="bg-white border border-gray-200 rounded-xl shadow-lg animate-in fade-in zoom-in-95"
+        >
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="all">
+            All Languages
+          </SelectItem>
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="English">
+            English
+          </SelectItem>
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="Hindi">
+            Hindi
+          </SelectItem>
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="Bengali">
+            Bengali
+          </SelectItem>
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="Gujarati">
+            Gujarati
+          </SelectItem>
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="Punjabi">
+            Punjabi
+          </SelectItem>
+        </SelectContent>
+      </Select>
+
+      {/* Status */}
+      <Select
+        value={selectedAvailability}
+        onValueChange={setSelectedAvailability}
+      >
+        <SelectTrigger
+          className="h-12 rounded-xl bg-gray-100 border border-gray-200 px-4 outline-none
+          focus:ring-2 focus:ring-purple-500
+          data-[state=open]:ring-2 data-[state=open]:ring-purple-500"
+        >
+          <SelectValue placeholder="All Status" />
+        </SelectTrigger>
+
+        <SelectContent
+          side="bottom"
+          sideOffset={8}
+          align="start"
+          avoidCollisions={false}
+          className="bg-white border border-gray-200 rounded-xl shadow-lg animate-in fade-in zoom-in-95"
+        >
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="all">
+            All Status
+          </SelectItem>
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="online">
+            Online Now
+          </SelectItem>
+          <SelectItem className="text-black hover:text-white hover:bg-[#184c96]" value="offline">
+            Offline
+          </SelectItem>
+        </SelectContent>
+      </Select>
+
+    </div>
+  </div>
+</section>   
       {/* Results Count */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <p className="text-gray-600">

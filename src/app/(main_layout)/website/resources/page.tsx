@@ -21,11 +21,12 @@ export default function ResourcesPage() {
 
   const categories = [
     { id: "all", label: "All Articles", icon: BookOpen, color: "purple" },
-    { id: "relationships", label: "Relationships", icon: Heart, color: "pink" },
-    { id: "mental-health", label: "Mental Health", icon: Brain, color: "blue" },
-    { id: "career", label: "Career", icon: Briefcase, color: "indigo" },
-    { id: "self-care", label: "Self-Care", icon: Star, color: "green" },
+    { id: "relationships", label: "Relationships", icon: Heart, color: "purple" },
+    { id: "mental-health", label: "Mental Health", icon: Brain, color: "purple" },
+    { id: "career", label: "Career", icon: Briefcase, color: "purple" },
+    { id: "self-care", label: "Self-Care", icon: Star, color: "purple" },
   ];
+
 
   const articles = [
     {
@@ -253,15 +254,21 @@ export default function ResourcesPage() {
 
             {/* Search Bar */}
             <div className="relative max-w-2xl mx-auto">
-              <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search articles..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-14 pr-6 py-4 rounded-2xl text-gray-800 focus:outline-none focus:ring-4 focus:ring-purple-300 shadow-xl"
-              />
-            </div>
+  <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+  
+  <input
+    type="text"
+    placeholder="Search articles..."
+    value={searchQuery}
+    onChange={(e) => setSearchQuery(e.target.value)}
+    className="w-full pl-14 pr-6 py-4 rounded-2xl 
+    bg-gray-100 text-black font-medium
+    border border-transparent
+    focus:bg-white focus:border-gray-300 
+    focus:outline-none focus:ring-2 focus:ring-purple-300
+    shadow-xl transition-all duration-200"
+  />
+</div>
           </motion.div>
         </div>
       </section>
@@ -278,7 +285,7 @@ export default function ResourcesPage() {
                   onClick={() => setSelectedCategory(cat.id)}
                   className={`flex items-center gap-2 px-4 sm:px-6 py-3 rounded-xl font-medium whitespace-nowrap transition-all ${
                     selectedCategory === cat.id
-                      ? `bg-gradient-to-r from-${cat.color}-600 to-${cat.color}-700 text-white shadow-lg`
+                      ? `bg-gradient-to-r from-${cat.color}-600 to-${cat.color}-500 text-white shadow-lg`
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                 >
@@ -290,7 +297,6 @@ export default function ResourcesPage() {
           </div>
         </div>
       </section>
-
       {/* Featured Articles */}
       {selectedCategory === "all" && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
