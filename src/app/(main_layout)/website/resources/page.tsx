@@ -21,11 +21,12 @@ export default function ResourcesPage() {
 
   const categories = [
     { id: "all", label: "All Articles", icon: BookOpen, color: "purple" },
-    { id: "relationships", label: "Relationships", icon: Heart, color: "pink" },
-    { id: "mental-health", label: "Mental Health", icon: Brain, color: "blue" },
-    { id: "career", label: "Career", icon: Briefcase, color: "indigo" },
-    { id: "self-care", label: "Self-Care", icon: Star, color: "green" },
+    { id: "relationships", label: "Relationships", icon: Heart, color: "purple" },
+    { id: "mental-health", label: "Mental Health", icon: Brain, color: "purple" },
+    { id: "career", label: "Career", icon: Briefcase, color: "purple" },
+    { id: "self-care", label: "Self-Care", icon: Star, color: "purple" },
   ];
+
 
   const articles = [
     {
@@ -284,7 +285,7 @@ export default function ResourcesPage() {
                   onClick={() => setSelectedCategory(cat.id)}
                   className={`flex items-center gap-2 px-4 sm:px-6 py-3 rounded-xl font-medium whitespace-nowrap transition-all ${
                     selectedCategory === cat.id
-                      ? `bg-gradient-to-r from-${cat.color}-600 to-${cat.color}-700 text-white shadow-lg`
+                      ? `bg-gradient-to-r from-${cat.color}-600 to-${cat.color}-500 text-white shadow-lg`
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                 >

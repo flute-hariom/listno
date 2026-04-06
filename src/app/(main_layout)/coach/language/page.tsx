@@ -97,7 +97,9 @@ const Page = () => {
               })}
             </div>
           )}
-
+<p className="text-gray-500 text-sm mt-6">
+  Complete your profile in around 5 minutes to become more visible and build more trust with users
+</p>
           {/* Bottom Buttons */}
           <div className="flex justify-between mt-8 gap-4">
             
