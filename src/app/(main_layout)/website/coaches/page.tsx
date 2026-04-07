@@ -197,7 +197,7 @@ export default function CoachesPage() {
         </SelectContent>
       </Select>
 
-      {/* Language */}
+      {/* Languages */}
       <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
         <SelectTrigger
           className="h-12 rounded-xl bg-gray-100 border border-gray-200 px-4 outline-none
