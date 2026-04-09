@@ -8,9 +8,13 @@ import RoleSwitcher from "@/src/components/shared/RoleSwitcher";
 import BackButton from "@/src/components/shared/BackButton";
 import { useState } from "react";
 
+
+
 export default function CoachDashboard() {
   const router = useRouter();
   const [isCoachApproved, setIsCoachApproved] = useState(false);
+const [isProfileCompleted, setIsProfileCompleted] = useState(false);
+  
 
   return (
     <div className="min-h-screen bg-gray-50 overflow-x-hidden max-w-[100vw]">
@@ -28,7 +32,7 @@ export default function CoachDashboard() {
       <main className="pb-28 pt-4 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           {/* Application Banner */}
-          {!isCoachApproved && (
+         {/* {!isCoachApproved && (
             <div className="mb-8 bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl p-6 text-white shadow-xl">
               <div className="flex items-center justify-between">
                 <div className="flex-1">
@@ -51,9 +55,37 @@ export default function CoachDashboard() {
                 </div>
               </div>
             </div>
-          )}
+          )} */}
 
-          <div className="mb-8">
+
+{/* Balance Card */}
+<div className="mb-8">
+  <div className="w-full bg-gradient-to-r bg-green-600 rounded-2xl p-8 text-white shadow-xl transition-all duration-300 hover:shadow-2xl">
+    
+    {/* Content Wrapper */}
+    <div className="flex flex-col gap-2">
+      
+      {/* Title */}
+      <p className="text-sm font-medium text-green-100">
+        Available Balance
+      </p>
+
+      {/* Amount */}
+      <h1 className="text-5xl font-bold tracking-tight">
+        ₹0
+      </h1>
+
+      {/* Description */}
+      <p className="text-sm text-green-100 mt-2 leading-relaxed max-w-md">
+        No earnings yet — Let’s begin. <br />
+        Your earnings will appear here once you start.
+      </p>
+
+    </div>
+  </div>
+</div>
+
+         {/* <div className="mb-8">
             <h1 className="text-3xl font-bold text-gray-800">
               {isCoachApproved
                 ? "Welcome back, Dr. Sarah! 👋"
@@ -64,9 +96,42 @@ export default function CoachDashboard() {
                 ? "Here's your coaching overview"
                 : "Explore the dashboard and get started when ready"}
             </p>
-          </div>
+          </div> */}
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+
+  {/* Today */}
+  <div className="bg-white rounded-2xl p-8 shadow-md hover:shadow-lg transition-all">
+    <p className="text-sm text-gray-500">Today</p>
+    <h2 className="text-2xl font-bold mt-2 text-gray-800">₹0</h2>
+    <p className="text-sm text-green-500 mt-2">No activity yet</p>
+  </div>
+
+  {/* This Week */}
+  <div className="bg-white rounded-2xl p-8 shadow-md hover:shadow-lg transition-all">
+    <p className="text-sm text-gray-500">This Week</p>
+    <h2 className="text-2xl font-bold mt-2 text-gray-800">₹0</h2>
+    <p className="text-sm text-green-500 mt-2">No activity yet</p>
+  </div>
+
+  {/* This Month */}
+  <div className="bg-white rounded-2xl p-8 shadow-md hover:shadow-lg transition-all">
+    <p className="text-sm text-gray-500">This Month</p>
+    <h2 className="text-2xl font-bold mt-2 text-gray-800">₹0</h2>
+    <p className="text-sm text-green-500 mt-2">No activity yet</p>
+  </div>
+
+  {/* Pending */}
+  <div className="bg-white rounded-2xl p-8 shadow-md hover:shadow-lg transition-all">
+    <p className="text-sm text-gray-500">Pending</p>
+    <h2 className="text-2xl font-bold mt-2 text-yellow-500">₹0</h2>
+    <p className="text-sm text-gray-400 mt-2">No pending transactions</p>
+  </div>
+
+</div>
+
+
+      {/*    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             {[
               {
                 icon: Users,
@@ -116,10 +181,10 @@ export default function CoachDashboard() {
                 </button>
               );
             })}
-          </div>
+          </div> 
 
           {/* Quick Action Cards */}
-          <div className="grid md:grid-cols-3 gap-4 mb-8">
+        {/*  <div className="grid md:grid-cols-3 gap-4 mb-8">
             <button
               onClick={() => router.push("/coach/clients")}
               className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl p-6 text-white shadow-lg hover:shadow-xl transition-all text-left"
@@ -218,9 +283,36 @@ export default function CoachDashboard() {
                 ))}
               </div>
             </div>
-          </div>
-        </div>
-      </main>
+          </div> */}
+
+
+      <div className="w-full mt-6">
+      <div className="w-full rounded-2xl p-6 text-white shadow-md 
+                     bg-gradient-to-br bg-green-600
+                     border border-green-400/30"
+      >
+        <h2 className="text-lg font-semibold mb-2">
+          Welcome aboard!
+        </h2>
+
+        <p className="text-sm text-green-100 mb-4">
+          You haven’t started earning yet.
+          Complete your first step to unlock your dashboard.
+        </p>
+
+        <button
+          onClick={() => window.location.href = "/coach/onboarding"}
+          className="bg-gradient-to-r from-purple-500 to-blue-500 px-5 py-2 rounded-lg font-medium hover:opacity-90 transition"
+        >
+          Complete profile to unlock more
+        </button>
+      </div>
+    </div>
+  
+
+
+        </div> 
+      </main> 
 
       {/* Bottom Navigation */}
       <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-2 sm:px-6 py-3 sm:py-4 shadow-lg z-40">
@@ -232,8 +324,8 @@ export default function CoachDashboard() {
               path: "/coach/dashboard",
               active: true,
             },
-            { icon: "📥", label: "Requests", path: "/coach/requests" },
-            { icon: "📅", label: "Schedule", path: "/coach/schedule" },
+            //{ icon: "📥", label: "Requests", path: "/coach/requests" },
+           // { icon: "📅", label: "Schedule", path: "/coach/schedule" },
             { icon: "💰", label: "Earnings", path: "/coach/earnings" },
             { icon: "👤", label: "Profile", path: "/coach/setup" },
           ].map((item) => (
@@ -253,3 +345,4 @@ export default function CoachDashboard() {
     </div>
   );
 }
+

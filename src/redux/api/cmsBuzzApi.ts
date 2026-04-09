@@ -27,6 +27,15 @@ export const cmsBuzzListApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ["listno"],
     }),
 
+    createRegisterDevice: builder.mutation({
+      query: (body) => ({
+        url: `/experience/session/auth/register-devices`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["listno"],
+    }),
+
     updateCmsBuzzList: builder.mutation({
       query: ({ id, body }) => ({
         url: `/api/v1/content-management/admin/flute-buzz/${id}`,
@@ -51,4 +60,5 @@ export const {
   useCreateCmsBuzzListMutation,
   useUpdateCmsBuzzListMutation,
   useDeleteCmsBuzzListMutation,
+  useCreateRegisterDeviceMutation,
 } = cmsBuzzListApiSlice;

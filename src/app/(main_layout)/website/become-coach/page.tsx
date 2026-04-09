@@ -15,12 +15,34 @@ import {
 } from "lucide-react";
 import { Button } from "@/src/components/ui/Button";
 import { Input } from "@/src/components/ui/Input";
-
 import { motion } from "framer-motion";
+import { useCreateRegisterDeviceMutation } from "@/src/redux/api/cmsBuzzApi";
+import { getDeviceId, getDeviceInfo } from "@/src/libs/deviceInfo";
+import { toast } from "react-hot-toast";
 
 export default function BecomeCoachPage() {
   const router = useRouter();
   const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const [createRegisterDevice] = useCreateRegisterDeviceMutation();
+
+  // const getDeviceId = () => {
+  //   let id = localStorage.getItem("deviceId");
+
+  //   if (!id) {
+  //     id = crypto.randomUUID();
+  //     localStorage.setItem("deviceId", id);
+  //   }
+
+  //   return id;
+  // };
+
+  const deviceId = getDeviceId();
+
+  console.log("Device ID:", deviceId);
+
+  const deviceInfo = getDeviceInfo();
+
+  console.log("Device Info:", deviceInfo);
 
   const benefits = [
     {
@@ -87,6 +109,28 @@ export default function BecomeCoachPage() {
     { value: "100K+", label: "Lives Impacted" },
   ];
 
+  const registerDevice = async (event: any) => {
+    event.preventDefault();
+
+    try {
+      const response = await createRegisterDevice({
+        deviceId: deviceId,
+        ...deviceInfo,
+      }).unwrap();
+
+      console.log("response", response);
+
+      toast.success(
+        response?.data?.message || "Device registered successfully",
+      );
+
+      router.push("/coach/language");
+    } catch (error: any) {
+      console.error("Device Register Failed", error);
+      toast.error(error?.data?.message || "Something went wrong");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
       {/* Hero */}
@@ -108,7 +152,8 @@ export default function BecomeCoachPage() {
             <Button
               size="lg"
               // onClick={() => router.push("/coach/onboarding")}
-              onClick={() => router.push("/coach/language")}
+              // onClick={() => router.push("/coach/language")}
+              onClick={registerDevice}
               className="bg-white text-purple-600 hover:bg-gray-100 text-lg h-14 px-8 cursor-pointer"
             >
               Apply to Become a Coach
