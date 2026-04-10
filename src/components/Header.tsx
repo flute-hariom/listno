@@ -156,7 +156,7 @@ export default function Header({ onLoginClick }: any) {
                 Become a Coach
               </button>
 
-              {/* Mobile Login Button */}
+              {/* Mobile Login Button s*/}
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
