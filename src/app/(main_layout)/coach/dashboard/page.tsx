@@ -1,7 +1,7 @@
 // this is the page of after completing all the details of becoming the coach
 "use client";
 
-import { Calendar, DollarSign, Users, Star, Briefcase } from "lucide-react";
+import { Calendar, DollarSign, Users, Star, Briefcase, icons } from "lucide-react";
 import { useRouter } from "next/navigation";
 import RoleSwitcher from "@/src/components/shared/RoleSwitcher";
 
@@ -324,6 +324,7 @@ const [isProfileCompleted, setIsProfileCompleted] = useState(false);
               path: "/coach/dashboard",
               active: true,
             },
+            { icon: "📩", label: "Message", path: "/coach/messages" },
             //{ icon: "📥", label: "Requests", path: "/coach/requests" },
            // { icon: "📅", label: "Schedule", path: "/coach/schedule" },
             { icon: "💰", label: "Earnings", path: "/coach/earnings" },
