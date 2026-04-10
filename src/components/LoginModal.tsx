@@ -29,8 +29,26 @@ export default function LoginModal({
   const handleLogin = (provider: "google" | "facebook") => {
     localStorage.setItem("loginContext", loginContext);
     localStorage.setItem("authProvider", provider);
-    router.push("/auth/login");
+    // router.push("/auth/login");/
   };
+
+  const responseGoogle = async (authResult: any) => {
+    try {
+      console.log("authResult:", authResult);
+
+      // Example redirect
+      // router.push("/dashboard");
+      router.push("/coach/language");
+    } catch (error) {
+      console.log("error while requesting google code:", error);
+    }
+  };
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: responseGoogle,
+    onError: responseGoogle,
+    flow: "auth-code",
+  });
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
@@ -47,9 +65,10 @@ export default function LoginModal({
         <div className="space-y-4 py-4">
           {/* Google */}
           <button
-            //   onClick={() => handleLogin("google")}
-            onClick={() => { onClose(); router.push("/users/onBoarding/step-1"); }}
-            
+            // onClick={() => handleLogin("google")}
+            onClick={() => googleLogin()}
+            // onClick={() => { onClose(); router.push("/users/onBoarding/step-1"); }}
+
             className="w-full h-[48px] relative flex items-center justify-center rounded-xl border border-gray-300 bg-[#F5F5F5] shadow-sm hover:shadow-md transition"
           >
             {/* Left Icon */}

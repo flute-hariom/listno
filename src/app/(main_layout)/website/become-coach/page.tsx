@@ -20,6 +20,10 @@ import { useCreateRegisterDeviceMutation } from "@/src/redux/api/cmsBuzzApi";
 import { getDeviceId, getDeviceInfo } from "@/src/libs/deviceInfo";
 import { toast } from "react-hot-toast";
 
+import { useGoogleLogin } from "@react-oauth/google";
+import { useDispatch } from "react-redux";
+import LoginModal from "@/src/components/LoginModal";
+
 export default function BecomeCoachPage() {
   const router = useRouter();
   const [loginModalOpen, setLoginModalOpen] = useState(false);
@@ -124,7 +128,10 @@ export default function BecomeCoachPage() {
         response?.data?.message || "Device registered successfully",
       );
 
-      router.push("/coach/language");
+      // router.push("/coach/language");
+
+      // ✅ Modal open
+      setLoginModalOpen(true);
     } catch (error: any) {
       console.error("Device Register Failed", error);
       toast.error(error?.data?.message || "Something went wrong");
@@ -161,7 +168,6 @@ export default function BecomeCoachPage() {
           </motion.div>
         </div>
       </section>
-
       {/* Stats */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-2 ">
         <div className="bg-white rounded-2xl shadow-2xl p-8">
@@ -183,7 +189,6 @@ export default function BecomeCoachPage() {
           </div>
         </div>
       </section>
-
       {/* Benefits */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-12">
@@ -210,7 +215,6 @@ export default function BecomeCoachPage() {
           ))}
         </div>
       </section>
-
       {/* Requirements */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="bg-white rounded-2xl p-8">
@@ -231,7 +235,6 @@ export default function BecomeCoachPage() {
           </div>
         </div>
       </section>
-
       {/* Process */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 bg-white/50">
         <div className="text-center mb-12">
@@ -261,7 +264,6 @@ export default function BecomeCoachPage() {
           ))}
         </div>
       </section>
-
       {/* CTA */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="bg-gradient-to-br from-purple-600 to-pink-600 rounded-3xl p-12 text-center text-white">
@@ -281,6 +283,11 @@ export default function BecomeCoachPage() {
           </Button>
         </div>
       </section>
+      <LoginModal
+        open={loginModalOpen}
+        onClose={() => setLoginModalOpen(false)}
+      />
+      ;
     </div>
   );
 }
