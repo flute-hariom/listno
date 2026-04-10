@@ -9,6 +9,8 @@ import {
   Award,
   Star,
   Clock,
+  Upload,
+  Pencil,
   Edit,
   Camera,
   DollarSign,
@@ -44,6 +46,22 @@ export default function CoachProfile() {
   const [showCategorySelector, setShowCategorySelector] = useState(false);
   const [showLanguageSelector, setShowLanguageSelector] = useState(false);
   const [showAvailabilityEditor, setShowAvailabilityEditor] = useState(false);
+
+  const [aadhaarFile, setAadhaarFile] = useState<File | null>(null);
+const [preview, setPreview] = useState<string | null>(null);
+
+const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const file = e.target.files?.[0];
+  if (file) {
+    setAadhaarFile(file);
+    setPreview(URL.createObjectURL(file));
+  }
+};
+
+const handleRemove = () => {
+  setAadhaarFile(null);
+  setPreview(null);
+};
 
   // Default/sample data
   const defaultData = {
@@ -1440,6 +1458,83 @@ export default function CoachProfile() {
           )}
         </div>
 
+{/* ✅ KYC Section */}
+<div className="bg-white rounded-2xl p-6 sm:p-8 shadow-lg mb-6">
+  
+  {/* Header */}
+  <div className="flex items-center justify-between mb-4">
+    <h3 className="text-xl font-bold text-gray-800 flex items-center gap-2">
+      <Shield className="w-6 h-6 text-blue-600" />
+      KYC Verification
+    </h3>
+
+    {aadhaarFile && (
+      <label
+        htmlFor="aadhaarUpload"
+        className="p-2 rounded-lg hover:bg-gray-100 cursor-pointer"
+      >
+        <Pencil className="w-5 h-5 text-gray-500" />
+      </label>
+    )}
+  </div>
+
+  {/* AFTER UPLOAD */}
+  {aadhaarFile ? (
+    <>
+      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-5 flex items-center justify-between">
+        <div>
+          <p className="text-sm text-gray-600">Status</p>
+          <p className="font-semibold text-blue-700">
+            Aadhaar Uploaded & Verified
+          </p>
+        </div>
+
+        <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+          <Shield className="w-5 h-5 text-blue-600" />
+        </div>
+      </div>
+
+      {/* Preview */}
+      {preview && (
+        <div className="relative mt-4">
+          <img
+            src={preview}
+            alt="Aadhaar"
+            className="w-full max-h-60 object-cover rounded-xl border"
+          />
+
+          <button
+            onClick={handleRemove}
+            className="absolute top-2 right-2 bg-white p-1 rounded-full shadow"
+          >
+            <X className="w-4 h-4 text-gray-600" />
+          </button>
+        </div>
+      )}
+    </>
+  ) : (
+    /* BEFORE UPLOAD */
+    <div className="bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl p-6 flex flex-col items-center text-center">
+      <Upload className="w-8 h-8 text-gray-400 mb-3" />
+
+      <input
+        type="file"
+        id="aadhaarUpload"
+        className="hidden"
+        accept="image/*"
+        onChange={handleFileChange}
+      />
+
+      <label
+        htmlFor="aadhaarUpload"
+        className="cursor-pointer px-5 py-2.5 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium shadow"
+      >
+        Upload Aadhaar
+      </label>
+    </div>
+  )}
+</div>
+
         {/* Actions - Only show when not editing */}
         {!isEditing && (
           <div className="space-y-3">
@@ -1452,7 +1547,7 @@ export default function CoachProfile() {
             </button>
           </div>
         )}
-      </div>
-    </div>
+          </div>
+        </div>
   );
 }
