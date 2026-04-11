@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { Chrome, Facebook } from "lucide-react";
 import { Button } from "./ui/Button";
 import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
+import { useCreateGoogleLoginMutation } from "../redux/api/cmsBuzzApi";
 
 import {
   Dialog,
@@ -25,6 +26,7 @@ export default function LoginModal({
   loginContext = "user",
 }: LoginModalProps) {
   const router = useRouter();
+  const [createGoogleLogin] = useCreateGoogleLoginMutation();
 
   const handleLogin = (provider: "google" | "facebook") => {
     localStorage.setItem("loginContext", loginContext);
