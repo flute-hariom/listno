@@ -25,14 +25,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-white">
-      <GoogleOAuthProvider clientId="1006740086739-hur0rkv9k7hf4rp40a4i4trjgg2bo7jg.apps.googleusercontent.com">
+      {/* <GoogleOAuthProvider clientId="1006740086739-hur0rkv9k7hf4rp40a4i4trjgg2bo7jg.apps.googleusercontent.com"> */}
+      <GoogleOAuthProvider clientId="273056186174-311tjvflm6kri7fet1v4hrq7qtl466u9.apps.googleusercontent.com">
+      
         <body
           className={
             "bg-white text-black min-h-screen m-0 flex place-items-center min-w-[320px]"
           }
         >
           <ReduxProvider>
-            <Toaster/>
+            <Toaster />
             {children}
           </ReduxProvider>
         </body>

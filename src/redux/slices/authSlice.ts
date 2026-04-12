@@ -19,8 +19,6 @@ const authSlice = createSlice({
     setEnv: (state, action) => {
       state.prod = action.payload;
     },
-
-
   },
 });
 
