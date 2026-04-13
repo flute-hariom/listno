@@ -16,6 +16,7 @@ export default function Header({ onLoginClick }: any) {
 
   const dispatch = useDispatch();
 
+  
   const isActive = (path: string) => pathname === path;
 
   const navLinks = [

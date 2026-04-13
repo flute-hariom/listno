@@ -1500,7 +1500,6 @@ const handleRemove = () => {
           <img
             src={preview}
             alt="Aadhaar"
-            className="w-full max-h-60 object-cover rounded-xl border"
           />
 
           <button
