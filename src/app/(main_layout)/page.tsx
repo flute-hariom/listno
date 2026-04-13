@@ -17,25 +17,13 @@ import {
   Shield,
 } from "lucide-react";
 import { motion } from "framer-motion";
-// import LoginModal from "@/components/LoginModal";
-import { useGetCmsBuzzListQuery } from "@/src/redux/api/cmsBuzzApi";
+// import LoginModal from "@/components/LoginModal"; 
 
 export default function HomePage() {
   const router = useRouter();
   const [loginModalOpen, setLoginModalOpen] = useState(false);
 
-  const { data: buzzData, isLoading: buzzLoading } = useGetCmsBuzzListQuery({
-    page: 1,
-    limit: 5,
-    sortBy: "createdAt",
-    sortOrder: "desc",
-  });
-
-  useEffect(() => {
-    if (buzzData && buzzData.data) {
-      console.log("CMS Buzz Data:", buzzData?.data);
-    }
-  }, [buzzData]);
+  
 
   const categories = [
     {
