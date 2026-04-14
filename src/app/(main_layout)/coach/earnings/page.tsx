@@ -652,7 +652,7 @@ export default function CoachEarnings() {
       )}
 
       {/* Bottom Navigation */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-6 py-4 shadow-lg z-40">
+     {/* <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-6 py-4 shadow-lg z-40">
         <div className="max-w-6xl mx-auto flex justify-around">
           {[
             { icon: "🏠", label: "Home", path: "/coach/dashboard" },
@@ -676,7 +676,7 @@ export default function CoachEarnings() {
             </button>
           ))}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

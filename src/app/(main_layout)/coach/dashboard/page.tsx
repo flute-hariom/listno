@@ -1,7 +1,7 @@
 // this is the page of after completing all the details of becoming the coach
 "use client";
 
-import { Calendar, DollarSign, Users, Star, Briefcase, icons } from "lucide-react";
+import { Calendar, DollarSign, Bell, Users, Star,CheckCircle, Briefcase, icons } from "lucide-react";
 import { useRouter } from "next/navigation";
 import RoleSwitcher from "@/src/components/shared/RoleSwitcher";
 
@@ -14,19 +14,134 @@ export default function CoachDashboard() {
   const router = useRouter();
   const [isCoachApproved, setIsCoachApproved] = useState(false);
 const [isProfileCompleted, setIsProfileCompleted] = useState(false);
+const [isOnline, setIsOnline] = useState(true);
+const [showNotifications, setShowNotifications] = useState(false);
   
 
   return (
     <div className="min-h-screen bg-gray-50 overflow-x-hidden max-w-[100vw]">
-      {/* Header with Role Switcher */}
-      <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
-        <div className="max-w-6xl mx-auto px-2 sm:px-4 py-3">
-          <div className="flex items-center justify-between gap-2">
-            <BackButton />
-            <RoleSwitcher currentRole="coach" />
-          </div>
+      
+{/* Header */}
+<header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+  <div className="max-w-6xl mx-auto px-2 sm:px-4 py-3">
+    
+    <div className="flex items-center justify-between">
+      
+      {/* Left */}
+      <BackButton />
+
+      {/* Right Section */}
+      <div className="flex items-center gap-3">
+
+        {/* Role Switcher (Profile + Coach + Logout inside it) */}
+        <RoleSwitcher currentRole="coach" />
+
+     <button
+  onClick={() => setShowNotifications(true)}
+  className="relative p-2 rounded-full hover:bg-gray-100 transition"
+>
+  <Bell className="w-5 h-5 text-gray-700" />
+  <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+</button>
+
+      </div>
+
+    </div>
+
+  </div>
+</header>
+
+{/* Notification Sidebar */}
+<div
+  className={`fixed inset-0 z-50 ${
+    showNotifications ? "block" : "hidden"
+  }`}
+>
+  {/* Overlay */}
+  <div
+    className="absolute inset-0 bg-black/30"
+    onClick={() => setShowNotifications(false)}
+  />
+
+  {/* Sidebar */}
+  <div
+    className={`absolute top-0 right-0 h-full w-[360px] bg-white shadow-2xl p-5 flex flex-col
+      transform transition-transform duration-300
+      ${showNotifications ? "translate-x-0" : "translate-x-full"}
+    `}
+  >
+    
+    {/* Header */}
+    <div className="flex items-center justify-between pb-3 border-b border-gray-200">
+      <h2 className="text-lg font-semibold text-gray-800">
+        Notifications
+      </h2>
+      <button
+        onClick={() => setShowNotifications(false)}
+        className="text-gray-500 hover:text-black text-xl"
+      >
+        ✕
+      </button>
+    </div>
+
+    {/* Notifications List */}
+    <div className="flex flex-col gap-3 overflow-y-auto mt-3">
+
+      <div className="flex gap-3 p-3 rounded-xl hover:bg-gray-100 transition">
+        <div className="w-10 h-10 flex items-center justify-center rounded-full bg-purple-100">
+          <Users className="w-5 h-5 text-purple-600" />
         </div>
-      </header>
+        <div>
+          <p className="text-sm font-semibold text-gray-800">
+            New booking request
+          </p>
+          <p className="text-xs text-gray-500">
+            A client wants to book a session with you.
+          </p>
+          <p className="text-[10px] text-gray-400 mt-1">
+            2 min ago
+          </p>
+        </div>
+      </div>
+
+      <div className="flex gap-3 p-3 rounded-xl hover:bg-gray-100 transition">
+        <div className="w-10 h-10 flex items-center justify-center rounded-full bg-green-100">
+          <DollarSign className="w-5 h-5 text-green-600" />
+        </div>
+        <div>
+          <p className="text-sm font-semibold text-gray-800">
+            Payment received
+          </p>
+          <p className="text-xs text-gray-500">
+            ₹500 has been added to your balance.
+          </p>
+          <p className="text-[10px] text-gray-400 mt-1">
+            10 min ago
+          </p>
+        </div>
+      </div>
+
+      <div className="flex gap-3 p-3 rounded-xl hover:bg-gray-100 transition">
+        <div className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-100">
+          <CheckCircle className="w-5 h-5 text-blue-600" />
+        </div>
+        <div>
+          <p className="text-sm font-semibold text-gray-800">
+            Profile approved 🎉
+          </p>
+          <p className="text-xs text-gray-500">
+            You can now start accepting clients.
+          </p>
+          <p className="text-[10px] text-gray-400 mt-1">
+            1 hour ago
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 
       {/* Main Content */}
       <main className="pb-28 pt-4 px-4 sm:px-6">
@@ -57,6 +172,38 @@ const [isProfileCompleted, setIsProfileCompleted] = useState(false);
             </div>
           )} */}
 
+{/* Current Status Card */}
+<div className="mb-6">
+  <div className="bg-white 
+                  border border-gray-200 
+                  rounded-2xl p-5 
+                  shadow-md
+                  flex items-center justify-between">
+
+    {/* Left Content */}
+    <div>
+      <h3 className="text-gray-800 font-semibold text-lg">
+        Current Status
+      </h3>
+      <p className={`text-sm mt-1 ${isOnline ? "text-green-500" : "text-gray-400"}`}>
+        {isOnline ? "Online & Ready for calls" : "Offline"}
+      </p>
+    </div>
+
+    {/* Toggle Switch */}
+    <button
+      onClick={() => setIsOnline(!isOnline)}
+      className={`w-14 h-8 flex items-center rounded-full p-1 transition-all duration-300
+        ${isOnline ? "bg-green-500" : "bg-gray-300"}`}
+    >
+      <div
+        className={`w-6 h-6 bg-white rounded-full shadow transform transition-all duration-300
+          ${isOnline ? "translate-x-6" : "translate-x-0"}`}
+      />
+    </button>
+
+  </div>
+</div>
 
 {/* Balance Card */}
 <div className="mb-8">
@@ -328,7 +475,7 @@ const [isProfileCompleted, setIsProfileCompleted] = useState(false);
             //{ icon: "📥", label: "Requests", path: "/coach/requests" },
            // { icon: "📅", label: "Schedule", path: "/coach/schedule" },
             { icon: "💰", label: "Earnings", path: "/coach/earnings" },
-            { icon: "👤", label: "Profile", path: "/coach/setup" },
+            { icon: "👤", label: "Profile", path: "/coach/profile" },
           ].map((item) => (
             <button
               key={item.label}
