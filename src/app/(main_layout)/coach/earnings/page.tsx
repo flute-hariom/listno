@@ -38,6 +38,13 @@ export default function CoachEarnings() {
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
   const [withdrawAmount, setWithdrawAmount] = useState("");
   const [selectedMethod, setSelectedMethod] = useState("");
+  const [showBankModal, setShowBankModal] = useState(false);
+const [bankDetails, setBankDetails] = useState({
+   accountHolder: "Sakshi Meena",
+  bankName: "HDFC Bank",
+  accountNumber: "4567",
+  ifsc: "HDFC0001234",
+});
 
   const totalEarnings = 145250;
   const availableBalance = 45000;
@@ -475,8 +482,45 @@ export default function CoachEarnings() {
               </button>
             </div>
 
+{/* Bank Account Card */}
+<div className="bg-white rounded-2xl p-6 shadow-md mt-6">
+  <h3 className="text-xl font-bold text-gray-800 mb-4">
+    Bank Account Details
+  </h3>
+
+  <div className="space-y-3">
+    <div>
+      <p className="text-sm text-gray-500">Account Holder</p>
+      <p className="font-semibold text-gray-800">Sakshi Meena</p>
+    </div>
+
+    <div>
+      <p className="text-sm text-gray-500">Bank Name</p>
+      <p className="font-semibold text-gray-800">HDFC Bank</p>
+    </div>
+
+    <div>
+      <p className="text-sm text-gray-500">Account Number</p>
+      <p className="font-semibold text-gray-800">**** 4567</p>
+    </div>
+
+    <div>
+      <p className="text-sm text-gray-500">IFSC Code</p>
+      <p className="font-semibold text-gray-800">HDFC0001234</p>
+    </div>
+  </div>
+
+  {/* Button at Bottom */}
+  <button
+    onClick={() => setShowBankModal(true)}
+    className="w-full mt-6 py-3 border-2 border-purple-500 text-purple-600 rounded-xl font-semibold hover:bg-purple-200 transition-all"
+  >
+    Change Bank Details
+  </button>
+</div>
+
             {/* Withdrawal Methods */}
-            <div className="bg-white rounded-2xl p-6 shadow-md">
+           {/* <div className="bg-white rounded-2xl p-6 shadow-md">
               <h3 className="text-xl font-bold text-gray-800 mb-4">
                 Withdrawal Methods
               </h3>
@@ -510,7 +554,7 @@ export default function CoachEarnings() {
               <button className="w-full mt-4 py-3 border-2 border-dashed border-gray-300 rounded-xl text-gray-600 font-semibold hover:border-purple-300 hover:text-purple-600 transition-all">
                 + Add New Method
               </button>
-            </div>
+            </div> */}
 
             {/* Withdrawal History */}
             <div className="bg-white rounded-2xl p-6 shadow-md">
@@ -552,7 +596,7 @@ export default function CoachEarnings() {
       {/* Withdraw Modal */}
       {showWithdrawModal && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl shadow-2xl max-w-md w-full">
+          <div className="bg-white rounded-3xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6 border-b border-gray-200 flex items-center justify-between">
               <h2 className="text-2xl font-bold text-gray-800">
                 Withdraw Funds
@@ -650,6 +694,79 @@ export default function CoachEarnings() {
           </div>
         </div>
       )}
+
+{/* Bank Details Modal */}
+{showBankModal && (
+  <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    
+    <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md max-h-[90vh] flex flex-col">
+
+      {/* Header */}
+      <div className="p-6 border-b flex justify-between items-center">
+        <h2 className="text-xl font-bold">Edit Bank Details</h2>
+        <button onClick={() => setShowBankModal(false)}>
+          <X className="w-5 h-5 text-gray-600" />
+        </button>
+      </div>
+
+      {/* Scrollable Content */}
+      <div className="p-6 space-y-4 overflow-y-auto">
+
+        {/* Account Holder */}
+        <input
+          type="text"
+          placeholder="Account Holder Name"
+          value={bankDetails.accountHolder}
+          onChange={(e) =>
+            setBankDetails({ ...bankDetails, accountHolder: e.target.value })
+          }
+          className="w-full p-3 border rounded-xl focus:outline-none focus:border-purple-500"
+        />
+
+        {/* Bank Name */}
+        <input
+          type="text"
+          placeholder="Bank Name"
+          value={bankDetails.bankName}
+          onChange={(e) =>
+            setBankDetails({ ...bankDetails, bankName: e.target.value })
+          }
+          className="w-full p-3 border rounded-xl focus:outline-none focus:border-purple-500"
+        />
+
+        {/* Account Number */}
+        <input
+          type="text"
+          placeholder="Account Number"
+          value={bankDetails.accountNumber}
+          onChange={(e) =>
+            setBankDetails({ ...bankDetails, accountNumber: e.target.value })
+          }
+          className="w-full p-3 border rounded-xl focus:outline-none focus:border-purple-500"
+        />
+
+        {/* IFSC */}
+        <input
+          type="text"
+          placeholder="IFSC Code"
+          value={bankDetails.ifsc}
+          onChange={(e) =>
+            setBankDetails({ ...bankDetails, ifsc: e.target.value })
+          }
+          className="w-full p-3 border rounded-xl focus:outline-none focus:border-purple-500"
+        />
+
+        {/* Save Button */}
+        <button
+          onClick={() => setShowBankModal(false)}
+          className="w-full py-3 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-xl font-semibold"
+        >
+          Save Changes
+        </button>
+      </div>
+    </div>
+  </div>
+)}
 
       {/* Bottom Navigation */}
      {/* <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-6 py-4 shadow-lg z-40">
