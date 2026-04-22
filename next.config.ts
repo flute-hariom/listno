@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["images.unsplash.com"],
+    domains: ["images.unsplash.com", "randomuser.me"],
   },
   // Disable source maps in development
   productionBrowserSourceMaps: false,

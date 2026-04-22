@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
-import { Heart, Menu, X, Briefcase } from "lucide-react";
+import { Heart, Menu, X, Shield , Briefcase } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
@@ -84,6 +84,23 @@ export default function Header({ onLoginClick }: any) {
 
           {/* Desktop Actions */}
           <div className="hidden lg:flex items-center gap-3">
+{/*<button
+  onClick={() => router.push("/admin")}
+  style={{ backgroundColor: "#111827", color: "#fff" }}
+  className="px-5 py-2 rounded-xl font-medium shadow-sm"
+>
+  Admin
+</button>*/}
+<button
+  onClick={() => router.push("/admin")}
+  className="px-5 py-2 rounded-xl font-medium flex items-center gap-2 
+          bg-gradient-to-r from-[#314158] to-[#0F172B] 
+           text-white shadow-sm"
+>
+  <Shield className="w-4 h-4" />
+  Admin
+</button>
+
             {/* Become a Coach Button */}
             <button
               // onClick={() => router.push("/coach/dashboard")}
